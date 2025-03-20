@@ -40,7 +40,8 @@ const UsersPage = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, [toast]); // ✅ Ajout de 'toast' dans les dépendances
+  
 
   const handleEditUser = async (userId: string, newRole: Role) => {
     try {

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 
 interface User {
   id: string;
@@ -21,42 +21,41 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    console.log("🔍 Token récupéré depuis localStorage:", token); // Vérifier si le token est bien stocké
-    if (token) {
-      fetchUser(token);
-    }
-  }, [fetchUser]); 
+  // ✅ `fetchUser` est maintenant stable grâce à `useCallback`
+  const fetchUser = useCallback((token: string) => {
+    console.log("🔍 Envoi du token pour récupération de l'utilisateur...");
   
-
-  function fetchUser(token: string) {
-    console.log("🔍 Envoi du token pour récupération de l'utilisateur..."); // Vérifier si la requête est bien envoyée
-
     fetch("/api/me", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("🔍 Réponse API:", data); // Voir la réponse reçue de l'API
+        console.log("🔍 Réponse API:", data);
         if (data.user) {
           setUser(data.user);
           setIsAuthenticated(true);
         } else {
-          console.log("❌ Utilisateur non trouvé, déconnexion...");
-          logout();
+          throw new Error("Utilisateur non trouvé");
         }
       })
       .catch((error) => {
         console.log("❌ Erreur lors de la récupération de l'utilisateur:", error);
-        logout();
+        logout(); // Un seul appel ici
       });
-  }
+  }, []);
+  
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetchUser(token); // ✅ Plus de warning
+    }
+  }, [fetchUser]); // ✅ fetchUser est maintenant stable
 
   function login(token: string) {
     console.log("✅ Connexion réussie, stockage du token...");
     localStorage.setItem("token", token);
-    fetchUser(token); // ⬅️ Récupérer l'utilisateur après connexion
+    fetchUser(token);
   }
 
   function logout() {
