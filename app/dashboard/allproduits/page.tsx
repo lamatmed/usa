@@ -43,14 +43,12 @@ type Product = {
 
     useEffect(() => {
       if (!isAuthenticated) {
-          router.push("/login"); // Redirection vers la page de connexion
+          router.replace("/login"); // Remplace l'historique pour éviter le retour en arrière
       }
-  }, [isAuthenticated, router]); 
-  
+  }, [isAuthenticated, router]);
 
-    if (!isAuthenticated) {
-        return <p className="text-center text-red-500">Redirection en cours...</p>;
-    }
+  if (!isAuthenticated) return null;
+  
     const [products, setProducts] = useState<Product[]>([]);
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState("");
