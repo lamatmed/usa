@@ -42,10 +42,11 @@ type Product = {
     const router = useRouter();
 
     useEffect(() => {
-        if (!isAuthenticated) {
-            router.push("/login"); // Redirection vers la page de connexion
-        }
-    }, [isAuthenticated]);
+      if (!isAuthenticated) {
+          router.push("/login"); // Redirection vers la page de connexion
+      }
+  }, [isAuthenticated, router]); 
+  
 
     if (!isAuthenticated) {
         return <p className="text-center text-red-500">Redirection en cours...</p>;

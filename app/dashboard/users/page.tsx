@@ -17,9 +17,10 @@ const UsersPage = () => {
 
   useEffect(() => {
     if (!isAuthenticated || user?.role !== "ADMIN") {
-      router.push("/"); // Redirection vers l'accueil
+      router.push("/");
     }
-  }, [user, isAuthenticated, router]);
+  }, [isAuthenticated, user?.role, router]); // Ajout de `user?.role`
+  
 
   
   const [users, setUsers] = useState<any[]>([]);

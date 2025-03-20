@@ -27,7 +27,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (token) {
       fetchUser(token);
     }
-  }, []);
+  }, [fetchUser]); 
+  
 
   function fetchUser(token: string) {
     console.log("🔍 Envoi du token pour récupération de l'utilisateur..."); // Vérifier si la requête est bien envoyée
