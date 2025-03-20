@@ -1,13 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const SECRET_KEY = process.env.JWT_SECRET || "mon_secret_jwt"; // Utilise une variable d'environnement
 
-export async function POST(req: { json: () => PromiseLike<{ nni: any; password: any; }> | { nni: any; password: any; }; }) {
+export async function POST(req: NextRequest) { // ✅ Correction ici
   try {
-    const { nni, password } = await req.json();
+    const { nni, password } = await req.json(); // ✅ Plus d'erreur de typage
 
     if (!nni || !password) {
       return NextResponse.json({ message: "NNI et mot de passe requis" }, { status: 400 });
