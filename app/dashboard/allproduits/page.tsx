@@ -58,14 +58,15 @@ type Product = {
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const paginatedProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-
-  if (!isAuthenticated) return null;
-
   useEffect(() => {
     if (isAuthenticated) {
       loadProducts();
     }
   }, [isAuthenticated]);
+  
+  if (!isAuthenticated) return null;
+
+ 
   
   
   const loadProducts = async () => {
