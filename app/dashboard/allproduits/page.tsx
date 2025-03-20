@@ -25,9 +25,20 @@ type Product = {
      
     };
   };
+  interface AuthContextType {
+    user: any; // Remplace 'any' par le type réel de ton utilisateur
+    isAuthenticated: boolean;
+  }
+  
   
   export default function ManageProducts() {
-    const { user, isAuthenticated } = useContext(AuthContext) ?? {};
+   
+
+    const authContext = (useContext(AuthContext) || {}) as AuthContextType;
+    const { user, isAuthenticated } = authContext;
+
+    
+    
     const router = useRouter();
 
     useEffect(() => {
@@ -387,7 +398,7 @@ type Product = {
             <div key={product.id} className="border p-3 rounded flex justify-between items-center mb-2">
               <div className="flex items-center gap-3">
                 {/* Affichage de l'image du produit */}
-                {product.imageUrl && <img src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover" />}
+                {product.imageUrl && <Image src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover"  width={200} height={200} />}
                 <div>
                   <p className="text-black font-bold">{product.name}</p>
                   <p className="text-black">Quantité: {product.quantity}</p>

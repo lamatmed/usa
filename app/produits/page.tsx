@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Loader from "@/components/Loader";
 import { motion } from "framer-motion"; // Import de Framer Motion
+import Image from "next/image";
 
 type Product = {
   id: string;
@@ -89,10 +90,12 @@ export default function ManageProducts() {
                   className="flex items-center gap-4 bg-gradient-to-r from-blue-500 to-indigo-600 p-4 rounded-lg shadow-md text-white transition-transform"
                 >
                   {product.imageUrl && product.imageUrl !== "" ? (
-                    <img
+                    <Image
                       src={product.imageUrl}
                       alt={product.name}
                       className="w-20 h-20 object-cover rounded-md border border-gray-300"
+                      width={200}
+                      height={200}
                     />
                   ) : (
                     <div className="w-20 h-20 bg-gray-300 flex items-center justify-center text-gray-600 rounded-md">
