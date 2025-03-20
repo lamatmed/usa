@@ -65,24 +65,26 @@ type Product = {
 
 
 
+
   
-    useEffect(() => {
-      loadProducts();
-    }, []);
+  const loadProducts = async () => {
+    const data = await getProducts();
+    setProducts(
+      data.map((product) => ({
+        ...product,
+        imageUrl: product.imageUrl ?? "", // Remplace null par une chaîne vide
+        user: {
+          name: product.user?.name ?? "User Name", // Nom par défaut si null
+          nni: product.user?.nni ?? "User NNI", // NNI par défaut si null
+        },
+      }))
+    );
+  };
   
-    const loadProducts = async () => {
-        const data = await getProducts();
-        setProducts(
-          data.map((product) => ({
-            ...product,
-            imageUrl: product.imageUrl ?? "", // Replace null with an empty string
-            user: {
-              name: product.user?.name ?? "User Name", // Fallback to default name if not available
-              nni: product.user?.nni ?? "User NNI", // Fallback to default NNI if not available
-            },
-          }))
-        );
-      };
+  useEffect(() => {
+    loadProducts(); // ✅ Fonction bien déclarée avant utilisation
+  }, []);
+  
       
       
   const handlePageChange = (newPage: number) => {
@@ -150,7 +152,14 @@ type Product = {
           }).then(async (result) => {
             if (!result.isConfirmed) return;
       
-            Swal.fire({ title: "Traitement...", allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+            Swal.fire({
+              title: "Traitement...",
+              allowOutsideClick: false,
+              didOpen: () => {
+                  Swal.showLoading(Swal.getConfirmButton()); // Utilisation correcte
+              }
+          });
+          
       
             if (editingProduct) {
               // ✅ Mise à jour d'un produit
