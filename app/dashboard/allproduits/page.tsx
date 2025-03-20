@@ -34,42 +34,49 @@ type Product = {
   export default function ManageProducts() {
    
 
-    const authContext = useContext(AuthContext);
+    const { user, isAuthenticated } = useContext(AuthContext) ?? { user: null, isAuthenticated: false };
+   
 
-    if (!authContext) {
-      return <div>Chargement...</div>; // ✅ Evite une erreur si `AuthContext` est null
-    }
     
-    const { user, isAuthenticated } = authContext;
+    
     const router = useRouter();
-    
-    const [products, setProducts] = useState<Product[]>([]);
+
+
+  const [products, setProducts] = useState<Product[]>([]);
+
+  
+
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState("");
     const [price_v, setPriceV] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-    
-    // PAGINATION
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
-    const totalPages = Math.ceil(products.length / itemsPerPage);
-    const paginatedProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-    
-    const loadProducts = async () => {
-      const data = await getProducts();
-      setProducts(data);
-    };
-    
-    useEffect(() => {
-      if (isAuthenticated) {
-        loadProducts();
-      }
-    }, [isAuthenticated]);
-    
-    if (!isAuthenticated) return null;
-    
   
+    // PAGINATION
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const paginatedProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+
+  if (!isAuthenticated) return null;
+
+ 
+  
+  
+  const loadProducts = async () => {
+    const data = await getProducts();
+    setProducts(
+      data.map((product) => ({
+        ...product,
+        imageUrl: product.imageUrl ?? "", // Remplace null par une chaîne vide
+        user: {
+          name: product.user?.name ?? "User Name", // Nom par défaut si null
+          nni: product.user?.nni ?? "User NNI", // NNI par défaut si null
+        },
+      }))
+    );
+  };
   
 
       
