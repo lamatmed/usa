@@ -41,12 +41,6 @@ type Product = {
     
     const router = useRouter();
 
-    useEffect(() => {
-      if (isAuthenticated) {
-        loadProducts();
-      }
-    }, [isAuthenticated]);
-    
 
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -67,6 +61,12 @@ type Product = {
 
   if (!isAuthenticated) return null;
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadProducts();
+    }
+  }, [isAuthenticated]);
+  
   
   const loadProducts = async () => {
     const data = await getProducts();
