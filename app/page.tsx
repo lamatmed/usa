@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-gray-500 to-indigo-600 text-white px-4 md:px-10">
+    <section className="relative w-full min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-gray-500 to-indigo-600 text-white p-10 md:px-10">
       <motion.div
         className="relative w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 mb-6"
         initial={{ opacity: 0, scale: 0.8 }}
