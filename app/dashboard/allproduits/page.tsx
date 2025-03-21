@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { MessageCircle } from "lucide-react";
 
 type Product = {
     id: string;
@@ -423,7 +424,7 @@ type Product = {
                 <p className="text-black text-xs sm:text-sm">Quantité: {product.quantity}</p>
                 <p className="text-black text-xs sm:text-sm">Prix: {product.price_v} MRU</p>
                 <p className="text-black text-xs sm:text-sm">Créé par: {product.user.name}</p>
-                
+                <p className="text-black text-xs sm:text-sm"><MessageCircle size={24} />: {product.user.nni}</p>
               </div>
             </div>
     

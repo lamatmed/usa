@@ -81,7 +81,7 @@ export default function RegisterPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input name="name" placeholder="Nom" onChange={handleChange} required />
-            <Input name="nni" placeholder="NNI" onChange={handleChange} required />
+            <Input name="nni" placeholder="Numéro Télepnone" onChange={handleChange} required />
             <Input name="password" type="password" placeholder="Mot de passe" onChange={handleChange} required />
             <select name="role" value={userp.role} onChange={handleChange} className="w-full border rounded p-2 bg-gray-100">
               <option value={Role.USER}>Utilisateur</option>

@@ -58,7 +58,7 @@ const Login = () => {
           <CardContent>
             <div className="space-y-4">
               <Input
-                placeholder="NNI"
+                placeholder="Numéro Télepnone"
                 value={nni}
                 onChange={(e) => setNni(e.target.value)}
                 className="border-blue-400 focus:ring-blue-500"

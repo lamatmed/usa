@@ -102,7 +102,7 @@ const UsersPage = () => {
               <Card className="shadow-md">
                 <CardHeader>
                   <CardTitle>{user.name}</CardTitle>
-                  <CardDescription>{user.nni}</CardDescription>
+                  <CardDescription>Numéro Télepnone: {user.nni}</CardDescription>
                   <CardDescription className="text-blue-500">{user.role}</CardDescription>
                 </CardHeader>
                 <CardContent>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "@/utils/actions";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import Loader from "@/components/Loader";
 import { motion } from "framer-motion"; // Import de Framer Motion
 import Image from "next/image";
@@ -107,6 +107,7 @@ export default function ManageProducts() {
                     <p className="text-sm">Quantité: <span className="font-medium">{product.quantity}</span></p>
                     <p className="text-sm">Prix: <span className="font-medium">{product.price_v.toLocaleString("fr-MR")} MRU</span></p>
                     <p className="text-sm">Créé par: <span className="font-medium">{product.user.name}</span></p>
+                    <p className="text-sm"><MessageCircle size={24} />:<span className="font-medium">{product.user.name}</span></p>
                   </div>
                 </motion.div>
               ))
