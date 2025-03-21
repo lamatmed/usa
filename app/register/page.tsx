@@ -54,7 +54,7 @@ export default function RegisterPage() {
         description: `Bienvenue ${newUser.name}!`,
       });
 
-      router.push("/login");
+      router.push("/");
     } catch (error: any) {
       toast({
         title: "Erreur",
@@ -76,7 +76,7 @@ export default function RegisterPage() {
       <Card className="w-full max-w-sm shadow-lg bg-white rounded-xl">
         <CardHeader>
           <CardTitle className="text-center text-green-700">Inscription</CardTitle>
-          <CardDescription className="text-center text-black">Créez un compte pour accéder à l&apos application</CardDescription>
+          <CardDescription className="text-center text-black">Créez un compte pour accéder à l&apos; application</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
