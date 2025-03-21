@@ -65,14 +65,21 @@ export default function NavBar() {
           </DropdownMenuPortal>
         </DropdownMenu>
       ) : (
-        <div className="flex flex-col space-3">
-        <Button onClick={() => router.push("/register")} className="bg-white text-blue-600">
-          S&apos;inscription
+        <div className="flex flex-col space-y-3 items-center w-full">
+        <Button 
+          onClick={() => router.push("/register")} 
+          className="bg-white text-blue-600 w-full sm:w-auto"
+        >
+          S'inscrire
         </Button>
-         <Button onClick={() => router.push("/login")} className="bg-white text-blue-600">
+        <Button 
+          onClick={() => router.push("/login")} 
+          className="bg-white text-blue-600 w-full sm:w-auto"
+        >
           Se connecter
-         </Button>
+        </Button>
       </div>
+      
       )}
 
       {/* Menu Mobile */}
