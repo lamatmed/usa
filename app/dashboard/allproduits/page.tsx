@@ -424,12 +424,12 @@ type Product = {
                 <p className="text-black text-xs sm:text-sm">Quantité: {product.quantity}</p>
                 <p className="text-black text-xs sm:text-sm">Prix: {product.price_v} MRU</p>
                 <p className="text-black text-xs sm:text-sm">Créé par: {product.user.name}</p>
-                <p className="text-black text-xs sm:text-sm">
-                      <a
+                <p className="text-black text-xs sm:text-sm flex justify-center sm:justify-start">
+                                    <a
                                       href={`https://wa.me/${product.user.nni}`}
                                           target="_blank"
                                            rel="noopener noreferrer"
-                                             className=" text-green-500 "
+                                             className=" text-green-500 text-center"
                                           >
                                           <PhoneCall size={20} />
                                       </a>
