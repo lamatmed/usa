@@ -18,7 +18,7 @@ export default function NavBar() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  if (!authContext) return null; // Évite les erreurs si le contexte est `null`
+  if (!authContext) return null;
   
   const { user, isAuthenticated, logout } = authContext;
 
@@ -27,7 +27,6 @@ export default function NavBar() {
     router.push("/login");
   }
 
-  // Fermer le menu si on clique à l'extérieur
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const menu = document.getElementById("mobile-menu");
@@ -47,7 +46,7 @@ export default function NavBar() {
     <nav className="p-4 bg-gray-300 shadow-md flex items-center justify-between relative">
       {/* Logo + Menu mobile */}
       <div className="flex items-center space-x-4">
-        <Link href="/">
+        <Link href="/" className="flex-shrink-0">
           <Image src="/lok.jpg" alt="logo" width={70} height={70} />
         </Link>
         <h1 className="text-lg font-bold text-blue-600">Shopping</h1>
@@ -70,10 +69,9 @@ export default function NavBar() {
       {isAuthenticated && user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="bg-white text-blue-600">
-  {user.name.length > 12 ? user.name.slice(0, 12) + "..." : user.name}
-</Button>
-
+            <Button variant="outline" className="bg-white text-blue-600 max-w-[150px] truncate">
+              {user.name}
+            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuPortal>
             <DropdownMenuContent>
