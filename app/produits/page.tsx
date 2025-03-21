@@ -15,7 +15,7 @@ type Product = {
   price_v: number;
   imageUrl?: string | null;
   userId: string;
-  user: {  
+  user: {
     name: string;
     nni: string;
   };
@@ -123,9 +123,20 @@ export default function ManageProducts() {
                   )}
                   <div>
                     <p className="text-lg font-semibold">{product.name}</p>
-                    <p className="text-sm">Quantité: <span className="font-medium">{product.quantity}</span></p>
-                    <p className="text-sm">Prix: <span className="font-medium">{product.price_v.toLocaleString("fr-MR")} MRU</span></p>
-                    <p className="text-sm">Créé par: <span className="font-medium">{product.user.name}</span></p>
+                    <p className="text-sm">
+                      Quantité:{" "}
+                      <span className="font-medium">{product.quantity}</span>
+                    </p>
+                    <p className="text-sm">
+                      Prix:{" "}
+                      <span className="font-medium">
+                        {product.price_v.toLocaleString("fr-MR")} MRU
+                      </span>
+                    </p>
+                    <p className="text-sm">
+                      Créé par:{" "}
+                      <span className="font-medium">{product.user.name}</span>
+                    </p>
                     <a
                       href={`https://wa.me/${product.user.nni}`}
                       target="_blank"
@@ -138,35 +149,48 @@ export default function ManageProducts() {
                 </motion.div>
               ))
             ) : (
-              <p className="text-gray-500 text-center col-span-2">Aucun produit disponible.</p>
+              <p className="text-gray-500 text-center col-span-2">
+                Aucun produit disponible.
+              </p>
             )}
           </motion.div>
 
           {/* PAGINATION */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-4 mt-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mt-6 w-full"
+            >
               <Button
-                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition"
+                className={`flex items-center gap-1 sm:gap-2 bg-blue-600 text-white text-sm sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-800 transition ${
+                  currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+                }`}
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
               >
-                <ChevronLeft />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 Précédent
               </Button>
 
-              <span className="text-gray-800 font-medium">
+              <span className="text-gray-800 font-medium text-sm sm:text-base">
                 Page {currentPage} / {totalPages}
               </span>
 
               <Button
-                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition"
+                className={`flex items-center gap-1 sm:gap-2 bg-blue-600 text-white text-sm sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-800 transition ${
+                  currentPage === totalPages
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
               >
                 Suivant
-                <ChevronRight />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
-            </div>
+            </motion.div>
           )}
         </>
       )}

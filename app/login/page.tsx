@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { LogIn, Phone, Lock } from "lucide-react"; // Import des icônes
 
 const Login = () => {
   const [nni, setNni] = useState("");
@@ -16,12 +17,14 @@ const Login = () => {
   const router = useRouter();
   const { toast } = useToast();
   const auth = useContext(AuthContext);
-  const { user} = useContext(AuthContext) ?? {};
-   useEffect(() => {
-      if ( user) {
-        router.push("/");
-      }
-    }, [user, router]);
+  const { user } = auth ?? {};
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user, router]);
+
   const handleLogin = async () => {
     setLoading(true);
     try {
@@ -48,41 +51,67 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-blue-100">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-blue-400 to-blue-600">
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full max-w-sm p-6"
       >
-        <Card className="shadow-lg rounded-lg">
+        <Card className="shadow-lg rounded-lg bg-white">
           <CardHeader>
-            <CardTitle className="text-blue-700 text-center">Connexion</CardTitle>
-            <CardDescription className="text-center text-black">Entrez vos informations pour continuer</CardDescription>
+            <CardTitle className="text-blue-700 text-center flex items-center justify-center gap-2">
+              <LogIn className="w-6 h-6 text-blue-700" /> Connexion
+            </CardTitle>
+            <CardDescription className="text-center text-gray-600">
+              Entrez vos informations pour continuer
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <Input
-                placeholder="Numéro Télepnone"
-                value={nni}
-                onChange={(e) => setNni(e.target.value)}
-                className="border-blue-400 focus:ring-blue-500"
-              />
-              <Input
-                placeholder="Mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                className="border-blue-400 focus:ring-blue-500"
-              />
-              <Button
-                onClick={handleLogin}
-                disabled={loading}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="space-y-4"
+            >
+              {/* Input Téléphone */}
+              <div className="flex items-center border rounded-md p-2 bg-gray-100">
+                <Phone className="w-5 h-5 text-green-500 mr-2" />
+                <Input
+                  placeholder="Numéro Téléphone"
+                  value={nni}
+                  onChange={(e) => setNni(e.target.value)}
+                  className="border-none bg-transparent focus:ring-0 w-full"
+                />
+              </div>
+
+              {/* Input Mot de passe */}
+              <div className="flex items-center border rounded-md p-2 bg-gray-100">
+                <Lock className="w-5 h-5 text-red-500 mr-2" />
+                <Input
+                  placeholder="Mot de passe"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  className="border-none bg-transparent focus:ring-0 w-full"
+                />
+              </div>
+
+              {/* Bouton Connexion */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.4 }}
               >
-                {loading ? "Connexion..." : "Se connecter"}
-              </Button>
-            </div>
+                <Button
+                  onClick={handleLogin}
+                  disabled={loading}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2"
+                >
+                  {loading ? "Connexion..." : "Se connecter"}
+                </Button>
+              </motion.div>
+            </motion.div>
           </CardContent>
         </Card>
       </motion.div>

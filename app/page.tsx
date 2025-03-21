@@ -1,37 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6">
-      <motion.img
-        src="/lp.jpeg" // Remplace avec l'URL de ton image
-        alt="Illustration d'un business en croissance"
-        className="w-40 h-40 md:w-60 md:h-60 mb-6"
+    <section className="relative w-full min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-gray-500 to-indigo-600 text-white px-4 md:px-10">
+      <motion.div
+        className="relative w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 mb-6"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-      />
+      >
+        <Image
+          src="/1.png" // Remplace avec l'URL de ton image
+          alt="Illustration d'un business en croissance"
+          layout="fill"
+          objectFit="cover"
+          className="rounded-full shadow-lg"
+        />
+      </motion.div>
+
       <motion.h1
-        className="text-3xl md:text-6xl font-extrabold"
+        className="text-3xl md:text-5xl lg:text-6xl font-extrabold"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         Boostez votre Business 🚀
       </motion.h1>
+
       <motion.p
-        className="mt-4 text-lg md:text-xl max-w-2xl"
+        className="mt-4 text-lg md:text-xl lg:text-2xl max-w-2xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
       >
         Accélérez votre croissance avec une plateforme moderne et intuitive.
       </motion.p>
+
       <motion.a
         href="/produits"
-        className="mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-full shadow-lg hover:bg-gray-200 transition"
+        className="mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-full shadow-lg hover:bg-gray-200 transition transform hover:scale-105"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}

@@ -7,8 +7,8 @@ import { AuthContext } from "@/components/AuthContext"
 import { cn } from "@/lib/utils"
 import { 
   Users, 
-  GraduationCap, 
-  
+
+  ShoppingBasket ,
   LayoutDashboard 
 } from "lucide-react"
 
@@ -28,7 +28,7 @@ const navigation: Navigation = {
   ADMIN: [
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
     { name: "Les utilisateurs", href: "/dashboard/users", icon: Users },
-    { name: "Tous les produits", href: "/dashboard/allproduits", icon: GraduationCap },
+    { name: "Tous les produits", href: "/dashboard/allproduits", icon: ShoppingBasket},
    
   ],
   USER: [

@@ -1,20 +1,25 @@
 "use client";
 
-import { useState,useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Role } from "@prisma/client";
 import { motion } from "framer-motion";
 import { AuthContext } from "@/components/AuthContext";
+import { User, Lock, Phone } from "lucide-react";
 export default function RegisterPage() {
-  
-
   const { user } = useContext(AuthContext) ?? {};
   const router = useRouter();
-      useEffect(() => {
+  useEffect(() => {
     if (user) {
       router.push("/"); // Redirection vers l'accueil
     }
@@ -30,9 +35,10 @@ export default function RegisterPage() {
 
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
- 
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setUser({ ...userp, [name]: name === "role" ? (value as Role) : value });
   };
@@ -49,7 +55,7 @@ export default function RegisterPage() {
       setLoading(false);
       return;
     }
-    
+
     try {
       const res = await fetch("/api/register", {
         method: "POST",
@@ -57,7 +63,8 @@ export default function RegisterPage() {
         body: JSON.stringify(userp),
       });
 
-      if (!res.ok) throw new Error("Inscription échouée l'utilisateur existe déja");
+      if (!res.ok)
+        throw new Error("Inscription échouée l'utilisateur existe déja");
       const newUser = await res.json();
 
       toast({
@@ -86,20 +93,71 @@ export default function RegisterPage() {
     >
       <Card className="w-full max-w-sm shadow-lg bg-white rounded-xl">
         <CardHeader>
-          <CardTitle className="text-center text-green-700">Inscription</CardTitle>
-          <CardDescription className="text-center text-black">Créez un compte pour accéder à l&apos; application</CardDescription>
+          <CardTitle className="text-center text-green-700">
+            Inscription
+          </CardTitle>
+          <CardDescription className="text-center text-black">
+            Créez un compte pour accéder à l&apos; application
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input name="name" placeholder="Nom" onChange={handleChange} required />
-            <Input name="nni" placeholder="Numéro Télepnone" onChange={handleChange} required />
-            <Input name="password" type="password" placeholder="Mot de passe" onChange={handleChange} required />
-            <Input name="confirmPassword" type="password" placeholder="Confirmer le mot de passe" onChange={handleChange} required />
-            <select name="role" value={userp.role} onChange={handleChange} className="w-full border rounded p-2 bg-gray-100">
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500" />
+              <Input
+                name="name"
+                placeholder="Nom"
+                onChange={handleChange}
+                required
+                className="pl-10"
+              />
+            </div>
+            <div className="relative">
+              <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-500" />
+              <Input
+                name="nni"
+                placeholder="Numéro Téléphone"
+                onChange={handleChange}
+                required
+                className="pl-10"
+              />
+            </div>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-500" />
+              <Input
+                name="password"
+                type="password"
+                placeholder="Mot de passe"
+                onChange={handleChange}
+                required
+                className="pl-10"
+              />
+            </div>
+
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-500" />
+              <Input
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirmer le mot de passe"
+                onChange={handleChange}
+                required
+                className="pl-10"
+              />
+            </div>
+            <select
+              name="role"
+              value={userp.role}
+              onChange={handleChange}
+              className="w-full border rounded p-2 bg-gray-100"
+            >
               <option value={Role.USER}>Utilisateur</option>
-             
             </select>
-            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={loading}>
+            <Button
+              type="submit"
+              className="w-full bg-green-600 hover:bg-green-700 text-white"
+              disabled={loading}
+            >
               {loading ? "Inscription..." : "S'inscrire"}
             </Button>
           </form>
