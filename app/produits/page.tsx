@@ -25,12 +25,11 @@ export default function ManageProducts() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState(""); // État pour la recherche
 
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
-  const totalPages = Math.ceil(products.length / itemsPerPage) || 1;
-  const paginatedProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   useEffect(() => {
     loadProducts();
@@ -58,6 +57,17 @@ export default function ManageProducts() {
     }
   };
 
+  // Filtrage des produits par nom
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
@@ -69,6 +79,15 @@ export default function ManageProducts() {
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">
         🛍️ Liste des Produits
       </h1>
+
+      {/* Champ de recherche */}
+      <input
+        type="text"
+        placeholder="Rechercher un produit..."
+        className="w-full mb-4 p-2 border border-gray-300 rounded-lg"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
 
       {loading && <Loader />}
       {error && <p className="text-red-500 text-center">{error}</p>}
@@ -108,12 +127,12 @@ export default function ManageProducts() {
                     <p className="text-sm">Prix: <span className="font-medium">{product.price_v.toLocaleString("fr-MR")} MRU</span></p>
                     <p className="text-sm">Créé par: <span className="font-medium">{product.user.name}</span></p>
                     <a
-                    href={`https://wa.me/${product.user.nni}`}
-                        target="_blank"
-                         rel="noopener noreferrer"
-                           className="fixed bottom-4 right-4 bg-green-500 p-3 rounded-full text-white shadow-lg hover:bg-green-600 transition"
-                        >
-                        <PhoneCall size={20} />
+                      href={`https://wa.me/${product.user.nni}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="fixed bottom-4 right-4 bg-green-500 p-3 rounded-full text-white shadow-lg hover:bg-green-600 transition"
+                    >
+                      <PhoneCall size={20} />
                     </a>
                   </div>
                 </motion.div>
