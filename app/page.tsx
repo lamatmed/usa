@@ -5,8 +5,16 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="relative w-full h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6">
+      <motion.img
+        src="/lp.jpeg" // Remplace avec l'URL de ton image
+        alt="Illustration d'un business en croissance"
+        className="w-40 h-40 md:w-60 md:h-60 mb-6"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+      />
       <motion.h1
-        className="text-5xl md:text-6xl font-extrabold"
+        className="text-3xl md:text-6xl font-extrabold"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
