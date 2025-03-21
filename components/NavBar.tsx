@@ -30,7 +30,7 @@ export default function NavBar() {
         <Link href="/">
          <Image src={'/lok.jpg'} alt="logo" width={70} height={70}/>
         </Link>
-        <a  href="/produits"  className="text-sm font-bold text-blue-600  hover:bg-white">Shopping</a>
+        <a  href="/produits"  className="text-sm font-bold text-blue-600  hover:text-black">Shopping</a>
         
         {/* Bouton Menu Mobile */}
         <button 

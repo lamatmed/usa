@@ -84,12 +84,12 @@ const UsersPage = () => {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4 text-center">Gestion des Utilisateurs</h1>
+      <Link href={`/register`} className="ml-2 text-blue-500 hover:text-blue-600">
       <Button>
-        Ajouter un utilisateur
-        <Link href={`/register`} className="ml-2 text-blue-500 hover:text-blue-600">
-          +
-        </Link>
+         Ajouter un utilisateur 
+       
       </Button>
+      </Link>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {users.length > 0 ? (
           users.map((user) => (
