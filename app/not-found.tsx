@@ -16,7 +16,7 @@ const NotFound = () => {
         animate={{ scale: 1, opacity: 1 }} 
         transition={{ duration: 0.5 }}
       >
-        <AlertTriangle className="w-24 h-24 text-red-500 animate-bounce" />
+        <AlertTriangle className="w-24 h-24 text-red-700 animate-bounce" />
       </motion.div>
 
       <motion.div 
