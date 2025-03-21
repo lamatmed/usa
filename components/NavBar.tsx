@@ -54,7 +54,7 @@ export default function NavBar() {
             onClick={() => { router.push("/register"); setMenuOpen(false); }} 
             className="bg-white text-blue-600 w-full"
           >
-            S'inscrire
+            S&apos;inscrire
           </Button>
           <Button 
             onClick={() => { router.push("/login"); setMenuOpen(false); }} 
