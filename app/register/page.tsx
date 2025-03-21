@@ -160,6 +160,12 @@ export default function RegisterPage() {
             >
               {loading ? "Inscription..." : "S'inscrire"}
             </Button>
+            <p className="text-center text-sm mt-2">
+                    Vous avez déjà un compte ?{" "}
+                        <a href="/login" className="text-blue-600 hover:underline">
+                             Se connecter
+                        </a>
+             </p>
           </form>
         </CardContent>
       </Card>

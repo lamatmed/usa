@@ -110,6 +110,12 @@ const Login = () => {
                 >
                   {loading ? "Connexion..." : "Se connecter"}
                 </Button>
+                <p className="text-center text-sm mt-2">
+                    Vous n&apos; avez pas un compte ?{" "}
+                        <a href="/register" className="text-blue-600 hover:underline">
+                             Inscrire
+                        </a>
+                 </p>
               </motion.div>
             </motion.div>
           </CardContent>

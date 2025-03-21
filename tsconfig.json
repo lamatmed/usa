@@ -1,4 +1,5 @@
-{"compilerOptions": {
+{
+  "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -24,7 +25,7 @@
   },
   "include": [
     "next-env.d.ts",
-    "components/ui/**/*.tsx",
+    
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
