@@ -429,7 +429,7 @@ type Product = {
                                       href={`https://wa.me/${product.user.nni}`}
                                           target="_blank"
                                            rel="noopener noreferrer"
-                                             className=" text-green-500 text-center"
+                                             className=" text-green-500"
                                           >
                                           <PhoneCall size={20} />
                                       </a>
