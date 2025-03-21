@@ -381,87 +381,79 @@ type Product = {
       
   
     return (
-      <div className="max-w-2xl mx-auto p-4 bg-white">
-        <h1 className="text-2xl font-bold mb-4 text-center text-black">Gérer les Produits</h1>
-        <div className="bg-white shadow-md rounded-lg p-4">
-          <Input className="border p-2 w-full mb-2" placeholder="Nom" value={name} onChange={(e) => setName(e.target.value)} />
-          <Input className="border p-2 w-full mb-2" type="number" placeholder="Quantité" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-          <Input className="border p-2 w-full mb-2" type="number" placeholder="Prix de vente" value={price_v} onChange={(e) => setPriceV(e.target.value)} />
-          
-          {/* Affichage de l'image actuelle du produit si elle existe */}
-          {imageUrl && <Image
-  src={imageUrl || "/placeholder.jpg"}
-  alt="Image du produit"
-  width={200}
-  height={200}
-  onError={(e) => (e.currentTarget.src = "/default.jpeg")}
-/>
-}
-  
-          <Uploader onUpload={(url) => setImageUrl(url)} />
-          <Button className="bg-green-500 text-white p-2 rounded w-full mt-2" onClick={handleAddOrUpdateProduct}>
-            {editingProduct ? "Mettre à jour" : "Ajouter"}
+      <div className="max-w-2xl mx-auto p-4 bg-white w-full">  
+  <h1 className="text-xl sm:text-2xl font-bold mb-4 text-center text-black">Gérer les Produits</h1>  
+
+  <div className="bg-white shadow-md rounded-lg p-4">
+    <Input className="border p-2 w-full mb-2" placeholder="Nom" value={name} onChange={(e) => setName(e.target.value)} />
+    <Input className="border p-2 w-full mb-2" type="number" placeholder="Quantité" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+    <Input className="border p-2 w-full mb-2" type="number" placeholder="Prix de vente" value={price_v} onChange={(e) => setPriceV(e.target.value)} />
+
+    {imageUrl && (
+      <Image
+        src={imageUrl || "/placeholder.jpg"}
+        alt="Image du produit"
+        width={150}
+        height={150}
+        className="mx-auto sm:w-48 sm:h-48 object-cover rounded"
+        onError={(e) => (e.currentTarget.src = "/default.jpeg")}
+      />
+    )}
+
+    <Uploader onUpload={(url) => setImageUrl(url)} />
+    
+    <Button className="bg-green-500 text-white p-2 rounded w-full mt-2 text-sm sm:text-base">
+      {editingProduct ? "Mettre à jour" : "Ajouter"}
+    </Button>
+  </div>
+
+  <h2 className="text-lg sm:text-xl font-bold mt-6 text-black text-center">Liste des Produits</h2>
+
+  <div className="mt-4">
+    {paginatedProducts.map((product) => (
+      <div key={product.id} className="border p-3 rounded flex flex-col sm:flex-row justify-between items-center mb-2">
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          {product.imageUrl && (
+            <Image src={product.imageUrl} alt={product.name} width={100} height={100} className="w-20 h-20 sm:w-16 sm:h-16 object-cover rounded" />
+          )}
+          <div className="text-center sm:text-left">
+            <p className="text-black font-bold text-sm sm:text-base">{product.name}</p>
+            <p className="text-black text-xs sm:text-sm">Quantité: {product.quantity}</p>
+            <p className="text-black text-xs sm:text-sm">Prix: {product.price_v} MRU</p>
+            <p className="text-black text-xs sm:text-sm">Créé par: {product.user.name}</p>
+            <p className="text-black text-xs sm:text-sm">NNI: {product.user.nni}</p>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-2 mt-2 sm:mt-0">
+          <Button className="bg-blue-500 text-white px-2 py-1 rounded text-xs sm:text-sm" onClick={() => {
+            setEditingProduct(product);
+            setName(product.name);
+            setQuantity(product.quantity.toString());
+            setPriceV(product.price_v.toString());
+            setImageUrl(product.imageUrl || "");
+          }}>
+            Modifier
+          </Button>
+          <Button className="bg-red-500 text-white px-2 py-1 rounded text-xs sm:text-sm" onClick={() => handleDeleteProduct(product.id)}>
+            Supprimer
           </Button>
         </div>
-  
-        <h2 className="text-xl font-bold mt-6 text-black">Liste des Produits</h2>
-        <div className="mt-4">
-          {paginatedProducts.map((product) => (
-            <div key={product.id} className="border p-3 rounded flex justify-between items-center mb-2">
-              <div className="flex items-center gap-3">
-                {/* Affichage de l'image du produit */}
-                {product.imageUrl && <Image src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover"  width={200} height={200} />}
-                <div>
-                  <p className="text-black font-bold">{product.name}</p>
-                  <p className="text-black">Quantité: {product.quantity}</p>
-                  <p className="text-black">Prix: {product.price_v} MRU</p>
-                  <p className="text-black">Créé par: {product.user.name}</p>
-                  <p className="text-black">NNI: {product.user.nni}</p>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  className="bg-blue-500 text-white px-3 py-1 rounded"
-                  onClick={() => {
-                    setEditingProduct(product);
-                    setName(product.name);
-                    setQuantity(product.quantity.toString());
-                    setPriceV(product.price_v.toString());
-                    setImageUrl(product.imageUrl || "");
-                  }}
-                >
-                  Modifier
-                </Button>
-                <Button className="bg-red-500 text-white px-3 py-1 rounded" onClick={() => handleDeleteProduct(product.id)}>
-                  Supprimer
-                </Button>
-              </div>
-            </div>
-          ))}
-
-<div className="flex justify-center items-center gap-4 mt-4">
-        <Button
-          className="bg-gray-500 text-white px-3 py-1 rounded"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Précédent
-        </Button>
-
-        <span className="text-black">
-          Page {currentPage} / {totalPages}
-        </span>
-
-        <Button
-          className="bg-gray-500 text-white px-3 py-1 rounded"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Suivant
-        </Button>
       </div>
-        </div>
-      </div>
+    ))}
+
+    <div className="flex justify-center items-center gap-4 mt-4">
+      <Button className="bg-gray-500 text-white px-3 py-1 rounded text-xs sm:text-sm" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+        Précédent
+      </Button>
+      <span className="text-black text-xs sm:text-sm">Page {currentPage} / {totalPages}</span>
+      <Button className="bg-gray-500 text-white px-3 py-1 rounded text-xs sm:text-sm" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+        Suivant
+      </Button>
+    </div>
+  </div>
+</div>
+
     );
   }
   

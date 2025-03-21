@@ -33,7 +33,7 @@ const navigation: Navigation = {
   ],
   USER: [
    
-    { name: "Mes Produits", href: "/produits", icon: Users },
+    { name: "Produits", href: "/produits", icon: Users },
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
   ],
 
