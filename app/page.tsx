@@ -16,7 +16,7 @@ export default function Hero() {
           src="/1.png" // Remplace avec l'URL de ton image
           alt="Illustration d'un business en croissance"
           layout="fill"
-          objectFit="cover"
+          fill style={{ objectFit: "cover" }} 
           className="rounded-full shadow-lg"
         />
       </motion.div>

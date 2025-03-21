@@ -104,170 +104,184 @@ const filteredProducts = products.filter((product) =>
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
+  };const handleAddOrUpdateProduct = async () => {
+    if (!isAuthenticated || !user) {
+      await Swal.fire({
+        icon: "error",
+        title: "Utilisateur non identifié",
+        text: "Veuillez vous connecter.",
+        background: "#1e293b",
+        color: "#f8fafc",
+        iconColor: "#e11d48",
+        confirmButtonColor: "#2563eb",
+        customClass: {
+          popup: "rounded-lg shadow-lg",
+          title: "text-lg font-bold text-white",
+          confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md",
+        }
+      });
+  
+      return;
+    }
+  
+    if (!name || !quantity || !price_v) {
+      await Swal.fire({
+        icon: "warning",
+        title: "Champs manquants",
+        text: "Remplissez tous les champs !",
+        background: "#1e293b",
+        color: "#f8fafc",
+        iconColor: "#e11d48",
+        confirmButtonColor: "#2563eb",
+        customClass: {
+          popup: "rounded-lg shadow-lg",
+          title: "text-lg font-bold text-white",
+          confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md",
+        }
+      });
+  
+      return;
+    }
+  
+    if (parseInt(quantity) < 0 || parseFloat(price_v) <= 0) {
+      await Swal.fire({
+        icon: "error",
+        title: "Valeur invalide",
+        text: "Valeurs incorrectes !",
+        background: "#1e293b",
+        color: "#f8fafc",
+        iconColor: "#e11d48",
+        confirmButtonColor: "#2563eb"
+      });
+  
+      return;
+    }
+  
+    try {
+      const result = await Swal.fire({
+        title: editingProduct ? "Mettre à jour ce produit ?" : "Ajouter ce produit ?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Oui",
+        cancelButtonText: "Annuler",
+        background: "#1e293b",
+        color: "#f8fafc",
+        iconColor: "#e11d48",
+        confirmButtonColor: "#2563eb",
+        customClass: {
+          popup: "rounded-lg shadow-lg",
+          title: "text-lg font-bold text-white",
+          confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md",
+        }
+      });
+  
+      if (!result.isConfirmed) return;
+  
+      Swal.fire({
+        title: "Traitement...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading(Swal.getDenyButton());
+        }
+      });
+  
+      if (editingProduct) {
+        // ✅ Mise à jour d'un produit
+        const product = products.find(p => p.id === editingProduct.id);
+        if (!product) {
+          await Swal.fire({
+            icon: 'error',
+            title: 'Produit introuvable',
+            text: 'Le produit à mettre à jour n\'existe pas.',
+            background: "#1e293b",
+            color: "#f8fafc",
+            iconColor: "#e11d48",
+            confirmButtonColor: "#2563eb",
+            customClass: {
+              popup: "rounded-lg shadow-lg",
+              title: "text-lg font-bold text-white",
+              confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md",
+            }
+          });
+  
+          return;
+        }
+  
+        // Vérification des autorisations
+        if (product.userId !== user.id && user.role !== "ADMIN") {
+          await Swal.fire({
+            icon: 'error',
+            title: 'Action non autorisée',
+            text: "Vous n'avez pas la permission de mettre à jour ce produit.",
+            background: "#1e293b",
+            color: "#f8fafc",
+            iconColor: "#e11d48",
+            confirmButtonColor: "#2563eb",
+            customClass: {
+              popup: "rounded-lg shadow-lg",
+              title: "text-lg font-bold text-white",
+              confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md",
+            }
+          });
+  
+          return;  // Arrêter l'exécution
+        }
+  
+        await updateProduct(
+          String(editingProduct.id),
+          { name, quantity: parseInt(quantity), price_v: parseFloat(price_v), imageUrl },
+          user.id,
+          user.role as "ADMIN" | "USER"
+        );
+  
+        await Swal.fire({
+          icon: 'success',
+          title: 'Infos',
+          text: "Produit mis à jour !",
+          background: "#1e293b",
+          color: "#f8fafc",
+          iconColor: "#e11d48",
+          confirmButtonColor: "#2563eb",
+          customClass: {
+            popup: "rounded-lg shadow-lg",
+            title: "text-lg font-bold text-white",
+            confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md",
+          }
+        });
+  
+      } else {
+        // ✅ Ajout d'un nouveau produit
+        await createProduct({ name, quantity: parseInt(quantity), price_v: parseFloat(price_v), imageUrl }, user.id);
+  
+        await Swal.fire({
+          icon: 'success',
+          title: 'Infos',
+          text: "Produit ajouté !",
+          background: "#1e293b",
+          color: "#f8fafc",
+          iconColor: "#e11d48",
+          confirmButtonColor: "#2563eb",
+          customClass: {
+            popup: "rounded-lg shadow-lg",
+            title: "text-lg font-bold text-white",
+            confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md",
+          }
+        });
+      }
+  
+      loadProducts();
+      setEditingProduct(null);
+      setName("");
+      setQuantity("");
+      setPriceV("");
+      setImageUrl("");
+      Swal.close();
+    } catch (error) {
+      Swal.close();
+      toast.error("Une erreur est survenue !");
+    }
   };
-      const handleAddOrUpdateProduct = async () => {
-        if (!isAuthenticated || !user) {
-          Swal.fire({
-            icon: "error",
-            title: "Utilisateur non identifié",
-            text: "Veuillez vous connecter.",
-            background: "#1e293b", // Fond sombre
-            color: "#f8fafc", // Texte clair
-            iconColor: "#e11d48", // Icône rouge vif
-            confirmButtonColor: "#2563eb", // Couleur du bouton de confirmation
-            customClass: {
-              popup: "rounded-lg shadow-lg", // Style général
-              title: "text-lg font-bold text-white", // Style du titre
-              confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md", // Style du bouton
-            }
-          });
-          
-          return;
-        }
-      
-        if (!name || !quantity || !price_v) {
-          Swal.fire({ icon: "warning", title: "Champs manquants", text: "Remplissez tous les champs !" ,
-            background: "#1e293b", // Fond sombre
-            color: "#f8fafc", // Texte clair
-            iconColor: "#e11d48", // Icône rouge vif
-            confirmButtonColor: "#2563eb", // Couleur du bouton de confirmation
-            customClass: {
-              popup: "rounded-lg shadow-lg", // Style général
-              title: "text-lg font-bold text-white", // Style du titre
-              confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md", // Style du bouton
-            }
-          });
-          return;
-        }
-      
-        if (parseInt(quantity) < 0 || parseFloat(price_v) <= 0) {
-          Swal.fire({ icon: "error", title: "Valeur invalide", text: "Valeurs incorrectes !" });
-          return;
-        }
-      
-        try {
-          Swal.fire({
-            title: editingProduct ? "Mettre à jour ce produit ?" : "Ajouter ce produit ?",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Oui",
-            cancelButtonText: "Annuler",
-            background: "#1e293b", // Fond sombre
-            color: "#f8fafc", // Texte clair
-            iconColor: "#e11d48", // Icône rouge vif
-            confirmButtonColor: "#2563eb", // Couleur du bouton de confirmation
-            customClass: {
-              popup: "rounded-lg shadow-lg", // Style général
-              title: "text-lg font-bold text-white", // Style du titre
-              confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md", // Style du bouton
-            }
-            
-          }).then(async (result) => {
-            if (!result.isConfirmed) return;
-      
-            Swal.fire({
-              title: "Traitement...",
-              allowOutsideClick: false,
-              didOpen: () => {
-                  Swal.showLoading(Swal.getConfirmButton()); // Utilisation correcte
-              }
-          });
-          
-      
-            if (editingProduct) {
-              // ✅ Mise à jour d'un produit
-              const product = products.find(p => p.id === editingProduct.id); // Récupérer le produit à mettre à jour
-              if (!product) {
-                Swal.fire({ icon: 'error', title: 'Produit introuvable', text: 'Le produit à mettre à jour n\'existe pas.',
-                  background: "#1e293b", // Fond sombre
-                  color: "#f8fafc", // Texte clair
-                  iconColor: "#e11d48", // Icône rouge vif
-                  confirmButtonColor: "#2563eb", // Couleur du bouton de confirmation
-                  customClass: {
-                    popup: "rounded-lg shadow-lg", // Style général
-                    title: "text-lg font-bold text-white", // Style du titre
-                    confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md", // Style du bouton
-                  }
-                 });
-                return;
-              }
-      
-              // Vérification des autorisations
-              if (product.userId !== user.id && user.role !== "ADMIN") {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Action non autorisée',
-                  text: "Vous n'avez pas la permission de mettre à jour ce produit.",
-                  background: "#1e293b", // Fond sombre
-                  color: "#f8fafc", // Texte clair
-                  iconColor: "#e11d48", // Icône rouge vif
-                  confirmButtonColor: "#2563eb", // Couleur du bouton de confirmation
-                  customClass: {
-                    popup: "rounded-lg shadow-lg", // Style général
-                    title: "text-lg font-bold text-white", // Style du titre
-                    confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md", // Style du bouton
-                  }
-                });
-                return;
-              }
-      
-              await updateProduct(
-                String(editingProduct.id),
-                { name, quantity: parseInt(quantity), price_v: parseFloat(price_v), imageUrl },
-                user.id,
-                user.role as "ADMIN" | "USER"
-              );
-              
-              Swal.fire({
-                icon: 'success',
-                title: 'Infos',
-                text: "Produit mis à jour !",
-                background: "#1e293b", // Fond sombre
-                color: "#f8fafc", // Texte clair
-                iconColor: "#e11d48", // Icône rouge vif
-                confirmButtonColor: "#2563eb", // Couleur du bouton de confirmation
-                customClass: {
-                  popup: "rounded-lg shadow-lg", // Style général
-                  title: "text-lg font-bold text-white", // Style du titre
-                  confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md", // Style du bouton
-                }
-              });
-              
-            
-            } else {
-              // ✅ Ajout d'un nouveau produit
-              await createProduct({ name, quantity: parseInt(quantity), price_v: parseFloat(price_v), imageUrl }, user.id);
-              Swal.fire({
-                icon: 'success',
-                title: 'Infos',
-                text: "Produit ajouté !",
-                background: "#1e293b", // Fond sombre
-                color: "#f8fafc", // Texte clair
-                iconColor: "#e11d48", // Icône rouge vif
-                confirmButtonColor: "#2563eb", // Couleur du bouton de confirmation
-                customClass: {
-                  popup: "rounded-lg shadow-lg", // Style général
-                  title: "text-lg font-bold text-white", // Style du titre
-                  confirmButton: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md", // Style du bouton
-                }
-              });
-            
-            }
-      
-            loadProducts();
-            setEditingProduct(null);
-            setName("");
-            setQuantity("");
-            setPriceV("");
-            setImageUrl("");
-            Swal.close();
-          });
-        } catch (error) {
-          Swal.close();
-          toast.error("Une erreur est survenue !");
-        }
-      };
-      
+  
   
     const handleDeleteProduct = async (productId: string) => {
         // Affichage de la confirmation de suppression

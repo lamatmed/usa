@@ -6,13 +6,11 @@ import NavBar from "@/components/NavBar";
 import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/Footer";
 
-
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Shopping",
-  description: "Application de gestion ",
+  description: "Application de gestion",
 };
 
 export default function RootLayout({
@@ -21,17 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <body className={inter.className}>
-      <div className="flex flex-col min-h-screen">
+    <html lang="fr" className={inter.className} suppressHydrationWarning>
+      <body className="flex flex-col min-h-screen">
         <AuthProvider>
           <NavBar />
-
           <main className="flex-grow mt-7">{children}</main>
-          <Toaster />
-          <Footer /> {/* Ajoute un espace entre children et le footer */}
+          <Footer />
         </AuthProvider>
-        </div>
+        <Toaster /> {/* Placer Toaster en dehors d'AuthProvider pour éviter sa réinitialisation */}
       </body>
     </html>
   );
