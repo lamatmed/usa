@@ -63,7 +63,7 @@ type Product = {
  
   useEffect(() => {
     if (!isAuthenticated) {
-        router.replace("/login"); // Empêche le retour en arrière
+        router.replace("/"); // Empêche le retour en arrière
     }
 }, [isAuthenticated, router]);
   
