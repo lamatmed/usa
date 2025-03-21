@@ -18,15 +18,7 @@ export default function NavBar() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  if (!authContext) return null; // Évite les erreurs si le contexte est `null`
   
-  const { user, isAuthenticated, logout } = authContext;
-
-  function handleLogout() {
-    logout();
-    router.push("/login");
-  }
-
   // Fermer le menu si on clique à l'extérieur
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -42,6 +34,15 @@ export default function NavBar() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [menuOpen]);
+  if (!authContext) return null; // Évite les erreurs si le contexte est `null`
+  
+  const { user, isAuthenticated, logout } = authContext;
+
+  function handleLogout() {
+    logout();
+    router.push("/login");
+  }
+
 
   return (
     <nav className="p-4 bg-gray-300 shadow-md flex items-center justify-between relative">
