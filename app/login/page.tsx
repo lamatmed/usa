@@ -113,7 +113,7 @@ const Login = () => {
                 <p className="text-center text-sm mt-2">
                     Vous n&apos; avez pas un compte ?{" "}
                         <a href="/register" className="text-blue-600 hover:underline">
-                             Inscrire
+                             S&apos;inscrire
                         </a>
                  </p>
               </motion.div>
