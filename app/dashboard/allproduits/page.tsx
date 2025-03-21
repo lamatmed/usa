@@ -421,7 +421,7 @@ type Product = {
             <p className="text-black text-xs sm:text-sm">Quantité: {product.quantity}</p>
             <p className="text-black text-xs sm:text-sm">Prix: {product.price_v} MRU</p>
             <p className="text-black text-xs sm:text-sm">Créé par: {product.user.name}</p>
-            <p className="text-black text-xs sm:text-sm">NNI: {product.user.nni}</p>
+           
           </div>
         </div>
 
