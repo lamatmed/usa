@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuPortal 
 } from "@/components/ui/dropdown-menu";
 import { MainNav } from "./main-nav";
-import { Menu, X } from "lucide-react"; // Importation des icônes Menu et X
+import { Menu, X } from "lucide-react"; // Icônes menu
 import Image from "next/image";
 import Link from "next/link";
 
@@ -28,10 +28,10 @@ export default function NavBar() {
       {/* Logo + Menu mobile */}
       <div className="flex items-center space-x-4">
         <Link href="/">
-         <Image src={'/lok.jpg'} alt="logo" width={70} height={70}/>
+          <Image src={'/lok.jpg'} alt="logo" width={70} height={70} />
         </Link>
         <a href="/produits" className="text-sm font-bold text-blue-600 hover:text-black">Shopping</a>
-        
+
         {/* Bouton Menu Mobile */}
         <button 
           className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-200 transition" 
@@ -39,14 +39,33 @@ export default function NavBar() {
         >
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
-        
-        {/* Navigation visible seulement en mode desktop */}
+
+        {/* Navigation Desktop */}
         <div className="hidden md:block">
           <MainNav />
         </div>
       </div>
 
-      {/* Menu déroulant pour les utilisateurs */}
+      {/* Menu Mobile */}
+      {menuOpen && (
+        <div className="absolute top-16 left-0 w-full bg-gray-200 shadow-lg flex flex-col p-4 space-y-3 md:hidden">
+          <MainNav />
+          <Button 
+            onClick={() => { router.push("/register"); setMenuOpen(false); }} 
+            className="bg-white text-blue-600 w-full"
+          >
+            S'inscrire
+          </Button>
+          <Button 
+            onClick={() => { router.push("/login"); setMenuOpen(false); }} 
+            className="bg-white text-blue-600 w-full"
+          >
+            Se connecter
+          </Button>
+        </div>
+      )}
+
+      {/* Menu déroulant utilisateur */}
       {isAuthenticated && user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -58,34 +77,29 @@ export default function NavBar() {
             <DropdownMenuContent>
               <DropdownMenuLabel>Connecté en tant que {user.role}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-red-500">
+              <DropdownMenuItem 
+                onClick={() => { handleLogout(); setMenuOpen(false); }} 
+                className="cursor-pointer text-red-500"
+              >
                 Déconnexion
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenuPortal>
         </DropdownMenu>
       ) : (
-        <div className="flex flex-col space-y-3 items-center w-full">
-        <Button 
-          onClick={() => router.push("/register")} 
-          className="bg-white text-blue-600 w-full sm:w-auto"
-        >
-          S'inscrire
-        </Button>
-        <Button 
-          onClick={() => router.push("/login")} 
-          className="bg-white text-blue-600 w-full sm:w-auto"
-        >
-          Se connecter
-        </Button>
-      </div>
-      
-      )}
-
-      {/* Menu Mobile */}
-      {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-gray-200 shadow-lg flex flex-col p-4 space-y-3 md:hidden">
-          <MainNav />
+        <div className="hidden md:flex space-x-3">
+          <Button 
+            onClick={() => router.push("/register")} 
+            className="bg-white text-blue-600"
+          >
+            S'inscrire
+          </Button>
+          <Button 
+            onClick={() => router.push("/login")} 
+            className="bg-white text-blue-600"
+          >
+            Se connecter
+          </Button>
         </div>
       )}
     </nav>
