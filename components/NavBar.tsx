@@ -55,7 +55,7 @@ export default function NavBar() {
             className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20"
           />
         </Link>
-        <h1 className="text-base sm:text-lg font-bold text-blue-600">Shopping</h1>
+       
         
         {/* Bouton Menu Mobile */}
         <button 
