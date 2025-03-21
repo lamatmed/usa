@@ -12,17 +12,18 @@ import { AuthContext } from "@/components/AuthContext";
 export default function RegisterPage() {
   
 
-  const { user, isAuthenticated } = useContext(AuthContext) ?? {};
+  const { user } = useContext(AuthContext) ?? {};
   const router = useRouter();
- useEffect(() => {
-    if (!isAuthenticated || user?.role !== "ADMIN") {
+      useEffect(() => {
+    if (user) {
       router.push("/"); // Redirection vers l'accueil
     }
-  }, [user, isAuthenticated, router]);
+  }, [user, router]);
 
   const [userp, setUser] = useState({
     nni: "",
     password: "",
+    confirmPassword: "",
     name: "",
     role: Role.USER,
   });
@@ -39,6 +40,16 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    if (userp.password !== userp.confirmPassword) {
+      toast({
+        title: "Erreur",
+        description: "Les mots de passe ne correspondent pas.",
+        variant: "destructive",
+      });
+      setLoading(false);
+      return;
+    }
+    
     try {
       const res = await fetch("/api/register", {
         method: "POST",
@@ -46,7 +57,7 @@ export default function RegisterPage() {
         body: JSON.stringify(userp),
       });
 
-      if (!res.ok) throw new Error("Inscription échouée");
+      if (!res.ok) throw new Error("Inscription échouée l'utilisateur existe déja");
       const newUser = await res.json();
 
       toast({
@@ -54,7 +65,7 @@ export default function RegisterPage() {
         description: `Bienvenue ${newUser.name}!`,
       });
 
-      router.push("/");
+      router.push("/login");
     } catch (error: any) {
       toast({
         title: "Erreur",
@@ -83,9 +94,10 @@ export default function RegisterPage() {
             <Input name="name" placeholder="Nom" onChange={handleChange} required />
             <Input name="nni" placeholder="Numéro Télepnone" onChange={handleChange} required />
             <Input name="password" type="password" placeholder="Mot de passe" onChange={handleChange} required />
+            <Input name="confirmPassword" type="password" placeholder="Confirmer le mot de passe" onChange={handleChange} required />
             <select name="role" value={userp.role} onChange={handleChange} className="w-full border rounded p-2 bg-gray-100">
               <option value={Role.USER}>Utilisateur</option>
-              <option value={Role.ADMIN}>Administrateur</option>
+             
             </select>
             <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={loading}>
               {loading ? "Inscription..." : "S'inscrire"}

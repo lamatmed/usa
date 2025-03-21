@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/components/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,12 @@ const Login = () => {
   const router = useRouter();
   const { toast } = useToast();
   const auth = useContext(AuthContext);
-
+  const { user} = useContext(AuthContext) ?? {};
+   useEffect(() => {
+      if ( user) {
+        router.push("/");
+      }
+    }, [user, router]);
   const handleLogin = async () => {
     setLoading(true);
     try {

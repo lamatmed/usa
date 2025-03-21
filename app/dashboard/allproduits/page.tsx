@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { MessageCircle, PhoneCall } from "lucide-react";
+import { PhoneCall } from "lucide-react";
 
 type Product = {
     id: string;
@@ -53,18 +53,17 @@ type Product = {
     const [price_v, setPriceV] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  
+    const [searchTerm, setSearchTerm] = useState("");
     // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const paginatedProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
 
 
  
   useEffect(() => {
     if (!isAuthenticated) {
-        router.replace("/"); // Empêche le retour en arrière
+        router.replace("/"); 
     }
 }, [isAuthenticated, router]);
   
@@ -87,8 +86,18 @@ type Product = {
     );
   };
 
+// Filtrage des produits
+const filteredProducts = products.filter((product) =>
+  product.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
- 
+  // Pagination appliquée aux produits filtrés
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
       
       
   const handlePageChange = (newPage: number) => {
@@ -412,6 +421,18 @@ type Product = {
     
       <h2 className="text-lg sm:text-xl font-bold mt-6 text-black text-center">Liste des Produits</h2>
     
+      <div className="flex justify-center mt-4">
+        <Input 
+          type="text"
+          placeholder="Rechercher vos produits..."
+          className="border p-2 rounded w-full sm:w-1/2"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1); // Réinitialiser la page lors de la recherche
+          }}
+        />
+      </div>
       <div className="mt-4">
         {paginatedProducts.map((product) => (
           <div key={product.id} className="border p-3 rounded flex flex-col sm:flex-row justify-between items-center mb-2">
