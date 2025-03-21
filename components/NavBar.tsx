@@ -48,7 +48,7 @@ export default function NavBar() {
 
       {/* Menu Mobile */}
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-gray-200 shadow-lg flex flex-col p-4 space-y-3 md:hidden">
+        <div className="absolute top-16 left-0 w-full bg-gray-300 shadow-lg flex flex-col p-4 space-y-3 md:hidden">
           <MainNav />
           <Button 
             onClick={() => { router.push("/register"); setMenuOpen(false); }} 
