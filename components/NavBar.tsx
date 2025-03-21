@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "@/components/AuthContext";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -9,47 +9,26 @@ import {
   DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuPortal 
 } from "@/components/ui/dropdown-menu";
 import { MainNav } from "./main-nav";
-import { Menu } from "lucide-react";
+import { Menu } from "lucide-react"; // Icône pour le menu mobile
 import Image from "next/image";
 import Link from "next/link";
 
 export default function NavBar() {
-  const authContext = useContext(AuthContext);
+  const { user, isAuthenticated, logout } = useContext(AuthContext)!;
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  
-  // Fermer le menu si on clique à l'extérieur
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      const menu = document.getElementById("mobile-menu");
-      if (menu && !menu.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
-    }
-    if (menuOpen) {
-      document.addEventListener("click", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [menuOpen]);
-  if (!authContext) return null; // Évite les erreurs si le contexte est `null`
-  
-  const { user, isAuthenticated, logout } = authContext;
 
   function handleLogout() {
     logout();
     router.push("/login");
   }
 
-
   return (
-    <nav className="p-4 bg-gray-300 shadow-md flex items-center justify-between relative">
+    <nav className="p-4 bg-gray-300 shadow-md flex items-center justify-between">
       {/* Logo + Menu mobile */}
       <div className="flex items-center space-x-4">
         <Link href="/">
-          <Image src="/lok.jpg" alt="logo" width={70} height={70} />
+         <Image src={'/lok.jpg'} alt="logo" width={70} height={70}/>
         </Link>
         <h1 className="text-lg font-bold text-blue-600">Shopping</h1>
         
@@ -93,10 +72,7 @@ export default function NavBar() {
 
       {/* Menu Mobile */}
       {menuOpen && (
-        <div 
-          id="mobile-menu"
-          className="absolute top-16 left-0 w-full bg-gray-200 shadow-lg flex flex-col p-4 space-y-3 md:hidden transition-all duration-300 ease-in-out"
-        >
+        <div className="absolute top-16 left-0 w-full bg-gray-200 shadow-lg flex flex-col p-4 space-y-3 md:hidden">
           <MainNav />
         </div>
       )}
