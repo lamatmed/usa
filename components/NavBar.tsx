@@ -70,9 +70,10 @@ export default function NavBar() {
       {isAuthenticated && user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="bg-white text-blue-600">
-              {user.name}
-            </Button>
+          <Button variant="outline" className="bg-white text-blue-600">
+  {user.name.length > 12 ? user.name.slice(0, 12) + "..." : user.name}
+</Button>
+
           </DropdownMenuTrigger>
           <DropdownMenuPortal>
             <DropdownMenuContent>

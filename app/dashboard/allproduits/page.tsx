@@ -425,7 +425,7 @@ type Product = {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-2 mt-2 sm:mt-0">
+        <div className="flex  sm:flex-row gap-2 mt-2 sm:mt-0">
           <Button className="bg-blue-500 text-white px-2 py-1 rounded text-xs sm:text-sm" onClick={() => {
             setEditingProduct(product);
             setName(product.name);
