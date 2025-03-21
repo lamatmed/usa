@@ -11,8 +11,8 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gestion École",
-  description: "Application de gestion scolaire",
+  title: "Shopping",
+  description: "Application de gestion ",
 };
 
 export default function RootLayout({
