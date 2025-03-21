@@ -34,13 +34,14 @@ type Product = {
   export default function ManageProducts() {
    
 
-    const { user, isAuthenticated } = useContext(AuthContext) ?? { user: null, isAuthenticated: false };
-   
+    const authContext = (useContext(AuthContext) ) as AuthContextType;
+    const { user, isAuthenticated } = authContext;
 
     
     
     const router = useRouter();
 
+   
 
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -59,10 +60,17 @@ type Product = {
   const paginatedProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
 
-  if (!isAuthenticated) return null;
-
  
+  useEffect(() => {
+    if (!isAuthenticated) {
+        router.replace("/login"); // Empêche le retour en arrière
+    }
+}, [isAuthenticated, router]);
   
+  useEffect(() => {
+    loadProducts(); // ✅ Fonction bien déclarée avant utilisation
+  }, []);
+  if (!isAuthenticated) return null;
   
   const loadProducts = async () => {
     const data = await getProducts();
@@ -77,8 +85,9 @@ type Product = {
       }))
     );
   };
-  
 
+
+ 
       
       
   const handlePageChange = (newPage: number) => {
