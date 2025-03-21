@@ -27,14 +27,14 @@ type Navigation = {
 const navigation: Navigation = {
   ADMIN: [
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
+    
+    { name: "Les produits", href: "/dashboard/allproduits", icon: ShoppingBasket},
     { name: "Les utilisateurs", href: "/dashboard/users", icon: Users },
-    { name: "Tous les produits", href: "/dashboard/allproduits", icon: ShoppingBasket},
-   
   ],
   USER: [
-   
-    { name: "Produits", href: "/produits", icon: Users },
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
+    { name: "Les produits", href: "/dashboard/allproduits", icon: Users },
+   
   ],
 
 }

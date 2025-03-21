@@ -63,7 +63,7 @@ const UsersPage = () => {
       <input
         type="text"
         className="border p-2 rounded w-full mb-4"
-        placeholder="Rechercher par Telephone"
+        placeholder="Numéro Téléphone"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
