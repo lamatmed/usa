@@ -70,7 +70,7 @@ type Product = {
   useEffect(() => {
     loadProducts(); // ✅ Fonction bien déclarée avant utilisation
   }, []);
-  if (!isAuthenticated) return null;
+ 
   
   const loadProducts = async () => {
     const data = await getProducts();
