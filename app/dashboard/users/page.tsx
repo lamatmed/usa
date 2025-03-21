@@ -10,21 +10,18 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/components/AuthContext";
 import Link from "next/link";
-const UsersPage = () => {
 
+const UsersPage = () => {
   const { user, isAuthenticated } = useContext(AuthContext) ?? {};
   const router = useRouter();
+  const [users, setUsers] = useState<any[]>([]);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (!isAuthenticated || user?.role !== "ADMIN") {
       router.push("/");
     }
-  }, [isAuthenticated, user?.role, router]); // Ajout de `user?.role`
-  
-
-  
-  const [users, setUsers] = useState<any[]>([]);
-  const { toast } = useToast();
+  }, [isAuthenticated, user?.role, router]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -40,20 +37,17 @@ const UsersPage = () => {
       }
     };
     fetchUsers();
-  }, [toast]); // ✅ Ajout de 'toast' dans les dépendances
-  
+  }, [toast]);
 
-  const handleEditUser = async (userId: string, newRole: Role) => {
+  const handleEditUser = async (userId: string, updatedData: Partial<{ name: string; nni: string; password: string; role: Role }>) => {
     try {
-      await updateUser(userId, { role: newRole });
+      await updateUser(userId, updatedData);
       setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === userId ? { ...user, role: newRole } : user
-        )
+        prevUsers.map((user) => (user.id === userId ? { ...user, ...updatedData } : user))
       );
       toast({
         title: "Utilisateur modifié",
-        description: "Rôle mis à jour avec succès.",
+        description: "Informations mises à jour avec succès.",
       });
     } catch (error) {
       toast({
@@ -64,31 +58,11 @@ const UsersPage = () => {
     }
   };
 
-  const handleDeleteUser = async (userId: string) => {
-    try {
-      await deleteUser(userId);
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
-      toast({
-        title: "Utilisateur supprimé",
-        description: "Cet utilisateur a été supprimé.",
-      });
-    } catch (error) {
-      toast({
-        title: "Erreur",
-        description: "Impossible de supprimer cet utilisateur.",
-        variant: "destructive",
-      });
-    }
-  };
-
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4 text-center">Gestion des Utilisateurs</h1>
       <Link href={`/register`} className="ml-2 text-blue-500 hover:text-blue-600">
-      <Button>
-         Ajouter un utilisateur 
-       
-      </Button>
+        <Button>Ajouter un utilisateur</Button>
       </Link>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {users.length > 0 ? (
@@ -101,21 +75,42 @@ const UsersPage = () => {
             >
               <Card className="shadow-md">
                 <CardHeader>
-                  <CardTitle>{user.name}</CardTitle>
-                  <CardDescription>Numéro Télepnone: {user.nni}</CardDescription>
-                  <CardDescription className="text-blue-500">{user.role}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col space-y-2">
+                  <CardTitle>
+                    <input
+                      type="text"
+                      className="border p-1 rounded w-full"
+                      defaultValue={user.name}
+                      onBlur={(e) => handleEditUser(user.id, { name: e.target.value })}
+                    />
+                  </CardTitle>
+                  <CardDescription>
+                    <input
+                      type="text"
+                      className="border p-1 rounded w-full"
+                      defaultValue={user.nni}
+                      onBlur={(e) => handleEditUser(user.id, { nni: e.target.value })}
+                    />
+                  </CardDescription>
+                  <CardDescription className="text-blue-500">
                     <select
                       className="border p-2 rounded"
                       defaultValue={user.role}
-                      onChange={(e) => handleEditUser(user.id, e.target.value as Role)}
+                      onChange={(e) => handleEditUser(user.id, { role: e.target.value as Role })}
                     >
                       <option value={Role.USER}>Utilisateur</option>
                       <option value={Role.ADMIN}>Administrateur</option>
                     </select>
-                    <Button variant="destructive" onClick={() => handleDeleteUser(user.id)}>
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col space-y-2">
+                    <input
+                      type="password"
+                      className="border p-1 rounded w-full"
+                      placeholder="Nouveau mot de passe"
+                      onBlur={(e) => handleEditUser(user.id, { password: e.target.value })}
+                    />
+                    <Button variant="destructive" onClick={() => deleteUser(user.id)}>
                       Supprimer
                     </Button>
                   </div>

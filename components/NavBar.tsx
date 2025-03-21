@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuPortal 
 } from "@/components/ui/dropdown-menu";
 import { MainNav } from "./main-nav";
-import { Menu } from "lucide-react"; // Icône pour le menu mobile
+import { Menu, X } from "lucide-react"; // Importation des icônes Menu et X
 import Image from "next/image";
 import Link from "next/link";
 
@@ -30,14 +30,14 @@ export default function NavBar() {
         <Link href="/">
          <Image src={'/lok.jpg'} alt="logo" width={70} height={70}/>
         </Link>
-        <a  href="/produits"  className="text-sm font-bold text-blue-600  hover:text-black">Shopping</a>
+        <a href="/produits" className="text-sm font-bold text-blue-600 hover:text-black">Shopping</a>
         
         {/* Bouton Menu Mobile */}
         <button 
           className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-200 transition" 
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <Menu className="w-6 h-6" />
+          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
         
         {/* Navigation visible seulement en mode desktop */}
