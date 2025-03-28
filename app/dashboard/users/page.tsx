@@ -19,7 +19,7 @@ const UsersPage = () => {
 
   useEffect(() => {
     if (user?.role !== "ADMIN") {
-      router.push("/");
+      router.push("/#");
     }
   }, [user?.role, router]);
 
