@@ -92,7 +92,7 @@ export default function RegisterPage() {
         title: "Inscription réussie",
         description: `Bienvenue ${newUser.name}!`,
       });
-      router.push("/dashboard");
+      router.push("/login");
     } catch (error: any) {
       toast({
         title: "Erreur",
