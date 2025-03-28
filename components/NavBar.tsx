@@ -4,9 +4,14 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/components/AuthContext";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { 
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem, 
-  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuPortal 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu";
 import { MainNav } from "./main-nav";
 import { Menu, X } from "lucide-react"; // Icônes menu
@@ -24,17 +29,26 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="p-4 bg-gray-300 shadow-md flex items-center justify-between">
+    <nav className="p-4 bg-gray-300 shadow-md flex items-center justify-between"   style={{
+      backgroundImage: "url('/uda.jpg')", // Remplace par ton image
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}>
       {/* Logo + Menu mobile */}
       <div className="flex items-center space-x-4">
         <Link href="/">
-          <Image src={'/lok.jpg'} alt="logo" width={70} height={70} />
+          <Image src={"/union.jpg"} alt="logo" width={70} height={70} />
         </Link>
-        <a href="/produits" className="text-sm font-bold text-blue-600 hover:text-black">Shopping</a>
+        <a
+          href="/activités"
+          className="text-sm font-bold text-blue-600 hover:text-blue-900  bg-white"
+        >
+          Activités
+        </a>
 
         {/* Bouton Menu Mobile */}
-        <button 
-          className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-200 transition" 
+        <button
+          className="md:hidden p-2 rounded-md text-black hover:bg-gray-200 transition bg-white"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -50,14 +64,20 @@ export default function NavBar() {
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-gray-300 shadow-lg flex flex-col p-4 space-y-3 md:hidden">
           <MainNav />
-          <Button 
-            onClick={() => { router.push("/register"); setMenuOpen(false); }} 
+          <Button
+            onClick={() => {
+              router.push("/register");
+              setMenuOpen(false);
+            }}
             className="bg-white text-blue-600 w-full"
           >
-             S&apos;inscrire
+            S&apos;inscrire
           </Button>
-          <Button 
-            onClick={() => { router.push("/login"); setMenuOpen(false); }} 
+          <Button
+            onClick={() => {
+              router.push("/login");
+              setMenuOpen(false);
+            }}
             className="bg-white text-blue-600 w-full"
           >
             Se connecter
@@ -69,16 +89,49 @@ export default function NavBar() {
       {isAuthenticated && user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="bg-white text-blue-600">
-              {user.name}
+            <Button
+              variant="outline"
+              className="bg-white text-blue-600 flex items-center space-x-2"
+            >
+              <Image
+                src={user.photo && user.photo !== "" ? user.photo : "/R.png"}
+                alt={`Photo de ${user.name}`}
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-full object-cover"
+              />
+
+              <span>{user.name}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuPortal>
             <DropdownMenuContent>
-              <DropdownMenuLabel>Connecté en tant que {user.role}</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                <div className="flex items-center space-x-2">
+                  <Image
+                    src={
+                      user.photo && user.photo !== "" ? user.photo : "/R.png"
+                    }
+                    alt={`Photo de ${user.name}`}
+                    width={32}
+                    height={32}
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+
+                  <div>
+                    <p className="font-semibold">{user.name}</p>
+                    <p className="text-sm text-gray-500">
+                      Connecté en tant que {user.role}
+                    </p>
+                  </div>
+                </div>
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem 
-                onClick={() => { handleLogout(); setMenuOpen(false); }} 
+              <DropdownMenuItem
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
                 className="cursor-pointer text-red-500"
               >
                 Déconnexion
@@ -88,14 +141,14 @@ export default function NavBar() {
         </DropdownMenu>
       ) : (
         <div className="hidden md:flex space-x-3">
-          <Button 
-            onClick={() => router.push("/register")} 
+          <Button
+            onClick={() => router.push("/register")}
             className="bg-white text-blue-600"
           >
-           S&apos;inscrire
+            S&apos;inscrire
           </Button>
-          <Button 
-            onClick={() => router.push("/login")} 
+          <Button
+            onClick={() => router.push("/login")}
             className="bg-white text-blue-600"
           >
             Se connecter

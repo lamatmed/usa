@@ -1,27 +1,78 @@
-"use server";
-
+'use server'
 import { prisma } from "../lib/prisma";
 import bcrypt from "bcryptjs";
 
-// Gestion des utilisateurs
-export const createUser = async (data: { nni: string; password: string; name: string; role?: "ADMIN" | "USER" }) => {
+// Création d'un utilisateur avec des champs optionnels
+export const createUser = async (data: {
+  nni: string;
+  password: string;
+  name: string;
+  role?: "ADMIN" | "USER";
+  address?: string;
+  job?: string;
+  domain?: string;
+  cv?: string;
+  photo?: string;
+}) => {
   const hashedPassword = await bcrypt.hash(data.password, 10);
   return await prisma.user.create({
     data: { ...data, password: hashedPassword },
   });
 };
 
+// Récupérer un utilisateur par ID avec toutes les infos
 export const getUserById = async (id: string) => {
-  return await prisma.user.findUnique({ where: { id } });
+  return await prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      nni: true,
+      name: true,
+      role: true,
+      address: true,
+      job: true,
+      domain: true,
+      cv: true,
+      photo: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
 };
 
+// Récupérer tous les utilisateurs avec leurs détails
 export const getAllUsers = async () => {
-  return await prisma.user.findMany();
+  return await prisma.user.findMany({
+    select: {
+      id: true,
+      nni: true,
+      name: true,
+      role: true,
+      address: true,
+      job: true,
+      domain: true,
+      cv: true,
+      photo: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
 };
 
+// Mettre à jour un utilisateur avec les nouveaux champs
 export const updateUser = async (
   id: string,
-  data: Partial<{ nni: string; password: string; name: string; role: "ADMIN" | "USER" }>
+  data: Partial<{
+    nni: string;
+    password: string;
+    name: string;
+    role: "ADMIN" | "USER";
+    address: string;
+    job: string;
+    domain: string;
+    cv: string;
+    photo: string;
+  }>
 ) => {
   const user = await prisma.user.findUnique({ where: { id } });
   if (!user) throw new Error("L'utilisateur n'existe pas.");
@@ -30,67 +81,13 @@ export const updateUser = async (
     data.password = await bcrypt.hash(data.password, 10);
   }
 
-  return await prisma.user.update({ where: { id }, data });
-};
-
-export const deleteUser = async (id: string) => {
-  return await prisma.user.delete({ where: { id } });
-};
-
-// Gestion des produits
-export async function getProducts() {
-  return await prisma.product.findMany({
-    include: {
-      user: { // Include user data based on the relation
-        select: {
-          name: true, // Include user name
-          nni: true, // Include user NNI
-        },
-      },
-    },
-  });
-}
-
-export async function createProduct(
-  data: { name: string; quantity: number; price_v: number; imageUrl?: string },
-  userId: string
-) {
-  return await prisma.product.create({
-    data: {
-      ...data,
-      userId,
-    },
-  });
-}
-
-export async function updateProduct(
-  id: string,
-  data: { name: string; quantity: number; price_v: number; imageUrl?: string },
-  userId: string,
-  userRole: "ADMIN" | "USER"
-) {
-  const product = await prisma.product.findUnique({ where: { id } });
-  if (!product) throw new Error("Produit introuvable.");
-
-  // Vérification des droits
-  if (product.userId !== userId && userRole !== "ADMIN") {
-    throw new Error("Action non autorisée.");
-  }
-
-  return await prisma.product.update({
+  return await prisma.user.update({
     where: { id },
     data,
   });
-}
+};
 
-export async function deleteProduct(id: string, userId: string, userRole: "ADMIN" | "USER") {
-  const product = await prisma.product.findUnique({ where: { id } });
-  if (!product) throw new Error("Produit introuvable.");
-
-  // Vérification des droits
-  if (product.userId !== userId && userRole !== "ADMIN") {
-    throw new Error("Action non autorisée.");
-  }
-
-  return await prisma.product.delete({ where: { id } });
-}
+// Supprimer un utilisateur
+export const deleteUser = async (id: string) => {
+  return await prisma.user.delete({ where: { id } });
+};

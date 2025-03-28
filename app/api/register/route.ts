@@ -1,18 +1,27 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma"; // Assurez-vous d'avoir ce fichier pour initialiser Prisma
+import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
 
 export async function POST(req: Request) {
   try {
-    const { nni, password, name, role } = await req.json();
+    const { nni, password, name, role, address, job, domain, cv, photo } = await req.json();
+    
+    // Vérification des champs obligatoires
+    if (!nni || !password || !name) {
+      return NextResponse.json({ error: "NNI, mot de passe et nom sont obligatoires" }, { status: 400 });
+    }
+
+    // Hash du mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Création de l'utilisateur avec les champs optionnels
     const newUser = await prisma.user.create({
-      data: { nni, password: hashedPassword, name, role  },
+      data: { nni, password: hashedPassword, name, role, address, job, domain, cv, photo },
     });
 
     return NextResponse.json(newUser, { status: 201 });
+
   } catch (error) {
-    return NextResponse.json({ error: "Une erreur est survenue" }, { status: 500 });
+    return NextResponse.json({ error: "Une erreur est survenue lors de l'inscription" }, { status: 500 });
   }
 }

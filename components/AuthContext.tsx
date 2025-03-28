@@ -6,6 +6,11 @@ interface User {
   id: string;
   name: string;
   role: string;
+  photo: string| undefined;
+  address: string| undefined;
+  job:  string| undefined;
+  domain : string| undefined;
+  cv: string| undefined 
 }
 
 interface AuthContextType {

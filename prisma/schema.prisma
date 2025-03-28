@@ -20,18 +20,15 @@ model User {
   password  String
   name      String
   role      Role     @default(USER)
-  products  Product[] // Relation avec les produits
+
+  address   String?
+  job       String?
+  domain    String?
+  cv        String?   // Stocke un lien vers le CV ou un fichier
+  photo     String?   // Stocke un lien vers la photo de profil
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Product {
-  id        String   @id @default(uuid())
-  name      String
-  quantity  Int      @default(0)
-  price_v   Float
-  imageUrl  String?  // Image optionnelle
-  userId    String   // Clé étrangère
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-}
+

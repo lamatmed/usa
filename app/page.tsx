@@ -13,7 +13,7 @@ export default function Hero() {
         transition={{ duration: 0.8 }}
       >
         <Image
-          src="/1.png" // Remplace avec l'URL de ton image
+          src="/uda.jpg" // Remplace avec l'URL de ton image
           alt="Illustration d'un business en croissance"
           layout="fill"
           fill style={{ objectFit: "cover" }} 
@@ -27,7 +27,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Boostez votre Business 🚀
+       Union des Sortants  d&apos;Algérie 
       </motion.h1>
 
       <motion.p
@@ -36,17 +36,17 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
       >
-        Accélérez votre croissance avec une plateforme moderne et intuitive.
+        Rôles des diplômés dans le développement socio-économique, opportunités de coopération bilatérale, etc..
       </motion.p>
 
       <motion.a
-        href="/produits"
+        href="/login"
         className="mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-full shadow-lg hover:bg-gray-200 transition transform hover:scale-105"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        Commencez maintenant
+        Connecter
       </motion.a>
     </section>
   );

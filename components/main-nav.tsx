@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { 
   Users, 
 
-  ShoppingBasket ,
+  ComputerIcon ,
   LayoutDashboard 
 } from "lucide-react"
 
@@ -28,12 +28,12 @@ const navigation: Navigation = {
   ADMIN: [
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
     
-    { name: "Les produits", href: "/dashboard/allproduits", icon: ShoppingBasket},
+    { name: "Mon espace", href: "/dashboard/espace-user", icon: ComputerIcon},
     { name: "Les utilisateurs", href: "/dashboard/users", icon: Users },
   ],
   USER: [
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Les produits", href: "/dashboard/allproduits", icon: Users },
+    { name: "Mon espace", href: "/dashboard/espace-user", icon: Users },
    
   ],
 
@@ -62,7 +62,7 @@ export function MainNav() {
                 "flex items-center text-sm font-medium transition-colors duration-200 px-4 py-2 rounded-lg w-full md:w-auto",
                 isActive 
                   ? "text-blue-600 bg-gray-100 md:border-b-2 border-blue-600"
-                  : "text-gray-700 hover:text-blue-500 hover:bg-gray-100"
+                  : "text-gray-700 bg-white hover:text-blue-500 hover:bg-gray-100"
               )}
             >
               <Icon className="mr-2 h-5 w-5" />
@@ -71,7 +71,7 @@ export function MainNav() {
           )
         })
       ) : (
-        <span className="text-gray-700 text-sm">Connectez-vous pour accéder au menu</span>
+        <span className="text-black text-sm">Connectez-vous pour accéder au menu</span>
       )}
     </nav>
   )

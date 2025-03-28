@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ShoppingBasket, Users } from "lucide-react";
+import { ComputerIcon, Users } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -49,10 +49,11 @@ export default function Home() {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <ShoppingBasket className="h-6 w-6" />
-                  Produits
+                 
+                  <ComputerIcon className="h-6 w-6"/>
+                  Espace 
                 </CardTitle>
-                <CardDescription>Gérez tous vos produits</CardDescription>
+                <CardDescription>Gérez mon espace</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button asChild className="w-full">
