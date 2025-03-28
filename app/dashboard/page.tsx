@@ -17,10 +17,10 @@ export default function Home() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-3">
-            Système de Gestion
+          Union des Sortants  d&apos;Algérie 
           </h1>
           <p className="text-lg text-gray-700 dark:text-gray-300">
-            Gérez efficacement votre stock et vos utilisateurs.
+            Gérez efficacement votre espace.
           </p>
         </motion.div>
 
