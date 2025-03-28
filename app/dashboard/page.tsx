@@ -29,28 +29,27 @@ export default function Home() {
 
         {/* Grid Responsive */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          { user?.role !== "ADMIN"&& (
-     <>
-     <motion.div whileHover={{ scale: 1.05 }}>
-     <Card className="hover:shadow-lg transition-shadow">
-       <CardHeader>
-         <CardTitle className="flex items-center gap-2">
-           <Users className="h-6 w-6" />
-           Utilisateurs
-         </CardTitle>
-         <CardDescription>Gestion des utilisateurs</CardDescription>
-       </CardHeader>
-       <CardContent>
-         <Button asChild className="w-full">
-           <Link href="/dashboard/users">Accéder</Link>
-         </Button>
-       </CardContent>
-     </Card>
-   </motion.div>
+        {user?.role === "ADMIN" && ( 
+  <>
+    <motion.div whileHover={{ scale: 1.05 }}>
+      <Card className="hover:shadow-lg transition-shadow">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Users className="h-6 w-6" />
+            Utilisateurs
+          </CardTitle>
+          <CardDescription>Gestion des utilisateurs</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button asChild className="w-full">
+            <Link href="/dashboard/users">Accéder</Link>
+          </Button>
+        </CardContent>
+      </Card>
+    </motion.div>
+  </>
+)}
 
-     </>
-     )}
-  
          
           {/* Carte Produits */}
           <motion.div whileHover={{ scale: 1.05 }}>
