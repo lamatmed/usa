@@ -89,5 +89,25 @@ export const updateUser = async (
 
 // Supprimer un utilisateur
 export const deleteUser = async (id: string) => {
+  // Vérifier combien d'admins existent
+  const adminCount = await prisma.user.count({
+    where: { role: "ADMIN" },
+  });
+
+  // Vérifier si l'utilisateur à supprimer est un ADMIN
+  const userToDelete = await prisma.user.findUnique({
+    where: { id },
+  });
+
+  if (!userToDelete) {
+    throw new Error("Utilisateur non trouvé.");
+  }
+
+  if (userToDelete.role === "ADMIN" && adminCount === 1) {
+    throw new Error("Impossible de supprimer le dernier administrateur.");
+  }
+
+  // Supprimer l'utilisateur si les conditions sont respectées
   return await prisma.user.delete({ where: { id } });
 };
+
