@@ -49,21 +49,11 @@ const UsersPage = () => {
     try {
       await deleteUser(userId);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
-      toast({
-        title: "Utilisateur supprimé",
-        description: "L'utilisateur a été supprimé avec succès.",
-      });
-    } catch (error: any) {
-      // Vérifier si c'est l'erreur du dernier ADMIN
-     
-      toast({
-        title: "Erreur",
-        description:  error.message,
-        variant: "destructive",
-      });
+      toast({ title: "Utilisateur supprimé", description: "L'utilisateur a été supprimé avec succès." });
+    } catch (error) {
+      toast({ title: "Erreur", description:"Impossible de supprimer le dernier administrateur.", variant: "destructive" });
     }
   };
-  
 
   const filteredUsers = users.filter((user) => user.nni.includes(search));
 
