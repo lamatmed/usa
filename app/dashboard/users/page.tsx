@@ -55,14 +55,10 @@ const UsersPage = () => {
       });
     } catch (error: any) {
       // Vérifier si c'est l'erreur du dernier ADMIN
-      const errorMessage =
-        error.message === "Impossible de supprimer le dernier administrateur."
-          ? error.message
-          : "Impossible de supprimer cet utilisateur.";
-  
+     
       toast({
         title: "Erreur",
-        description: errorMessage,
+        description:  error.message,
         variant: "destructive",
       });
     }
