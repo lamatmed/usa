@@ -19,18 +19,18 @@ const Footer = () => {
       <div className="container mx-auto px-6 max-w-7xl text-center">
         {/* Liens rapides */}
         <nav className="mb-4 flex justify-center space-x-6 bg-white text-black">
-          <Link href="/" className="text-sm hover:text-blue-900 transition ">
+          <Link href="/" className="text-sm hover:bg-blue-400 transition ">
             Accueil
           </Link>
           <Link
             href="/contact"
-            className="text-sm hover:text-blue-900transition"
+            className="text-sm hover:text-blue-900transition hover:bg-blue-400 "
           >
             Contact
           </Link>
           <Link
             href="/about"
-            className="text-sm hover:text-blue-900 transition"
+            className="text-sm hover:bg-blue-400 transition"
           >
             À propos
           </Link>
