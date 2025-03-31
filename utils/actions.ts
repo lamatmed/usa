@@ -111,3 +111,59 @@ export const deleteUser = async (id: string) => {
   return await prisma.user.delete({ where: { id } });
 };
 
+
+
+export async function castVote(userId: string, choice: string) {
+  try {
+    // Vérifier si l'utilisateur a déjà voté (optionnel, si un seul vote est permis)
+    const existingVote = await prisma.vote.findUnique({
+      where: { userId }
+    });
+
+    if (existingVote) {
+      throw new Error("Vous avez déjà voté.");
+    }
+
+    // Enregistrer le vote
+    const vote = await prisma.vote.create({
+      data: {
+        userId,
+        choice,
+      },
+    });
+
+    return { success: true, message: "Vote enregistré avec succès", vote };
+  } catch (error) {
+    return { 
+      success: false, 
+      message: error instanceof Error ? error.message : "Une erreur inconnue est survenue." 
+    };
+  }
+}
+
+
+export async function getVoteResults() {
+  const totalVotes = await prisma.vote.count();  // Nombre total de votes
+
+  const results = await prisma.vote.groupBy({
+    by: ["choice"],
+    _count: {
+      choice: true,
+    },
+  });
+
+  // Organiser les résultats pour chaque choix
+  const resultsObj = {
+    UDA: 0,
+    UDE: 0,
+    Naitre: 0,
+    totalVotes: totalVotes,
+  };
+
+  results.forEach((result) => {
+    resultsObj[result.choice as keyof typeof resultsObj] = result._count.choice;
+  });
+
+  return resultsObj;
+}
+

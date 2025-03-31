@@ -58,7 +58,7 @@ const Login = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full max-w-sm p-6"
       >
-        <Card className="shadow-lg rounded-lg bg-white">
+        <Card className="shadow-lg rounded-lg bg-white ">
           <CardHeader>
             <CardTitle className="text-blue-700 text-center flex items-center justify-center gap-2">
               <LogIn className="w-6 h-6 text-blue-700" /> Connexion

@@ -26,9 +26,16 @@ model User {
   domain    String?
   cv        String?   // Stocke un lien vers le CV ou un fichier
   photo     String?   // Stocke un lien vers la photo de profil
-
+  votes     Vote[]    // Relation avec le modèle Vote
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 
+model Vote {
+  id        String   @id @default(cuid())
+  userId    String   @unique // Un utilisateur ne peut voter qu'une fois
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  choice    String   // UDA, UDE ou Naitre
+  createdAt DateTime @default(now())
+}
