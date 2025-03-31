@@ -29,7 +29,7 @@ export default function Home() {
 
         {/* Grid Responsive */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {user?.role === "ADMIN" && ( 
+        {user && ( 
   <>
     <motion.div whileHover={{ scale: 1.05 }}>
       <Card className="hover:shadow-lg transition-shadow">
@@ -47,12 +47,9 @@ export default function Home() {
         </CardContent>
       </Card>
     </motion.div>
-  </>
-)}
 
-         
-          {/* Carte Produits */}
-          <motion.div whileHover={{ scale: 1.05 }}>
+
+    <motion.div whileHover={{ scale: 1.05 }}>
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -69,6 +66,12 @@ export default function Home() {
               </CardContent>
             </Card>
           </motion.div>
+  </>
+)}
+
+         
+      
+         
         </div>
       </div>
 

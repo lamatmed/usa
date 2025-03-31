@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { Role } from "@prisma/client";
 import { updateUser } from "@/utils/actions"; // Import de l'action de mise à jour
 import { Pencil, User } from "lucide-react";
+import Image from "next/image";
 
 const UserProfile = () => {
   const { user } = useContext(AuthContext) ?? {};
@@ -162,7 +163,7 @@ const UserProfile = () => {
 
             {userp.photo && (
               <div className="mt-4 flex justify-center">
-                <img src={userp.photo} alt="Photo de profil" className="w-32 h-32 rounded-full shadow-md" />
+                <Image src={userp.photo} alt="Photo de profil" className="w-32 h-32 rounded-full shadow-md" />
               </div>
             )}
 
