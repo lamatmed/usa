@@ -36,13 +36,13 @@ export default function Home() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Users className="h-6 w-6" />
-            Utilisateurs
+            Modifier le profil
           </CardTitle>
-          <CardDescription>Gestion des utilisateurs</CardDescription>
+          <CardDescription>Gérer mon profil</CardDescription>
         </CardHeader>
         <CardContent>
           <Button asChild className="w-full">
-            <Link href="/dashboard/users">Accéder</Link>
+            <Link href="/dashboard/espace-user/update">Accéder</Link>
           </Button>
         </CardContent>
       </Card>
@@ -58,13 +58,13 @@ export default function Home() {
                 <CardTitle className="flex items-center gap-2">
                  
                   <ComputerIcon className="h-6 w-6"/>
-                  Espace 
+                  Eléctions du Bureau
                 </CardTitle>
-                <CardDescription>Gérez mon espace</CardDescription>
+                <CardDescription>Voter aux élections </CardDescription>
               </CardHeader>
               <CardContent>
                 <Button asChild className="w-full">
-                  <Link href="/dashboard/espace-user">Accéder</Link>
+                  <Link href="/dashboard/espace-user/votes">Accéder</Link>
                 </Button>
               </CardContent>
             </Card>

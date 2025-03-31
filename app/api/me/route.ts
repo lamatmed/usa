@@ -33,7 +33,7 @@ export async function GET(req: Request) {
     // Récupérer l'utilisateur depuis la base de données
     const user = await prisma.user.findUnique({
       where: { id: decoded.id as string },
-      select: { id: true, name: true, role: true , photo: true, address:true,
+      select: { id: true,nni:true, name: true, role: true , photo: true, address:true,
         job: true,
         domain: true,
         cv:true   },

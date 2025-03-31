@@ -3,6 +3,7 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 
 interface User {
+  nni: ReactNode;
   id: string;
   name: string;
   role: string;
