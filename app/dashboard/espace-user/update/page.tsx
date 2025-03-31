@@ -12,15 +12,16 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { AuthContext } from "@/components/AuthContext";
 import { motion } from "framer-motion";
-import { Role } from "@prisma/client";
+
 import { updateUser } from "@/utils/actions"; // Import de l'action de mise à jour
 import { Pencil, User } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const UserProfile = () => {
   const { user } = useContext(AuthContext) ?? {};
   const { toast } = useToast();
-
+  const router = useRouter();
   const [userp, setUser] = useState<{
     id: string;
     name: string;
@@ -39,7 +40,7 @@ const UserProfile = () => {
     nni: "",
     password: "",
     confirmPassword: "",
-   
+
     address: "",
     job: "",
     domain: "",
@@ -55,7 +56,7 @@ const UserProfile = () => {
         nni: user.nni || "",
         password: "",
         confirmPassword: "",
-      
+
         address: user.address || "",
         job: user.job || "",
         domain: user.domain || "",
@@ -65,7 +66,9 @@ const UserProfile = () => {
     }
   }, [user]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setUser((prev) => ({ ...prev, [name]: value }));
   };
@@ -81,23 +84,36 @@ const UserProfile = () => {
         cv: userp.cv,
         photo: userp.photo,
       });
-      toast({ title: "Mise à jour réussie", description: "Vos informations ont été mises à jour avec succès." });
+      toast({
+        title: "Mise à jour réussie",
+        description: "Vos informations ont été mises à jour avec succès.",
+      });
     } catch (error) {
-      toast({ title: "Erreur", description: "Impossible de mettre à jour vos informations.", variant: "destructive" });
+      toast({
+        title: "Erreur",
+        description: "Impossible de mettre à jour vos informations.",
+        variant: "destructive",
+      });
     }
   };
 
   if (!user) {
-    return <p className="text-center text-gray-500">Aucun utilisateur connecté.</p>;
+    return (
+      <p className="text-center text-gray-500">Aucun utilisateur connecté.</p>
+    );
   }
 
   return (
     <div className="p-6 max-w-2xl mx-auto ">
-        <h1 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-2">
+      <h1 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-2">
         <User className="w-6 h-6" /> Modifier le profil
       </h1>
 
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
         <Card className="shadow-md hover:shadow-lg">
           <CardHeader>
             <CardTitle>
@@ -110,7 +126,7 @@ const UserProfile = () => {
               />
             </CardTitle>
             <CardDescription>
-              Numéro Téléphone : 
+              Numéro Téléphone :
               <input
                 type="text"
                 name="nni"
@@ -120,7 +136,7 @@ const UserProfile = () => {
               />
             </CardDescription>
             <CardDescription>
-              Adresse : 
+              Adresse :
               <input
                 type="text"
                 name="address"
@@ -130,7 +146,7 @@ const UserProfile = () => {
               />
             </CardDescription>
             <CardDescription>
-              Emploi : 
+              Emploi :
               <input
                 type="text"
                 name="job"
@@ -140,7 +156,7 @@ const UserProfile = () => {
               />
             </CardDescription>
             <CardDescription>
-              Domaine : 
+              Domaine :
               <input
                 type="text"
                 name="domain"
@@ -149,7 +165,7 @@ const UserProfile = () => {
                 onChange={handleChange}
               />
             </CardDescription>
-            
+
             <CardDescription className="mt-4">
               <strong>CV :</strong>
               <textarea
@@ -163,16 +179,28 @@ const UserProfile = () => {
 
             {userp.photo && (
               <div className="mt-4 flex justify-center">
-                <Image src={userp.photo} alt="Photo de profil" className="w-32 h-32 rounded-full shadow-md" />
+                <Image
+                  src={userp.photo}
+                  alt="Photo de profil"
+                  height={80}
+                  width={80}
+                />
               </div>
             )}
-
-           
           </CardHeader>
 
-          <CardContent className="text-center">
-            <Button onClick={handleSave} className="bg-blue-500 text-white px-4 py-2 rounded">
-            <Pencil className="w-5 h-5" />Modifier
+          <CardContent className="text-center flex justify-center gap-2">
+            <Button
+              onClick={handleSave}
+              className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2"
+            >
+              <Pencil className="w-5 h-5" /> Modifier
+            </Button>
+            <Button
+              onClick={() => router.push("/dashboard/espace-user")}
+              className="bg-gray-500 text-white px-4 py-2 rounded"
+            >
+              Retour
             </Button>
           </CardContent>
         </Card>

@@ -5,11 +5,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ComputerIcon, Users } from "lucide-react";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "@/components/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
    const { user } = useContext(AuthContext) ?? {};
+   const router = useRouter();
+    // Rediriger les utilisateurs non connectés vers /login
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, [user, router]);
+
+  // Si user est null ou undefined, ne pas afficher la page (évite le clignotement)
+  if (!user) return null;
   return (
     <main className="min-h-screen bg-gradient-to-b from-green-300 to-green-700 dark:from-gray-900 dark:to-gray-800 flex flex-col">
       <div className="container mx-auto px-4 py-12 flex-1">

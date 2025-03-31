@@ -7,8 +7,10 @@ import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { AuthContext } from "@/components/AuthContext";
 import { castVote, getVoteResults } from "@/utils/actions"; // Import de l'action pour récupérer les résultats
+import { useRouter } from "next/navigation";
 
 const VotePage = () => {
+      const router = useRouter();
   const { user } = useContext(AuthContext) ?? {};
   const { toast } = useToast();
   const [selectedVote, setSelectedVote] = useState("");
@@ -109,7 +111,12 @@ const VotePage = () => {
             </Button>
           </CardContent>
         </Card>
-
+        <CardContent className="text-center flex justify-center gap-2">
+ 
+ <Button onClick={() => router.push("/dashboard/espace-user")} className="bg-gray-500 text-white px-4 py-2 rounded">
+   Retour
+ </Button>
+</CardContent>
         {/* Affichage des résultats en bas */}
         <Card className="mt-6 shadow-md border border-gray-200 p-4">
           <CardHeader>
@@ -176,8 +183,12 @@ const VotePage = () => {
           </CardContent>
         </Card>
       </motion.div>
+     
     </div>
+    
   );
+  
+
 };
 
 export default VotePage;

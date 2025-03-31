@@ -29,11 +29,14 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="p-4 bg-gray-300 shadow-md flex items-center justify-between"   style={{
-      backgroundImage: "url('/uda.jpg')", // Remplace par ton image
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}>
+    <nav
+      className="p-4 bg-gray-300 shadow-md flex items-center justify-between"
+      style={{
+        backgroundImage: "url('/uda.jpg')", // Remplace par ton image
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Logo + Menu mobile */}
       <div className="flex items-center space-x-4">
         <Link href="/">
@@ -41,7 +44,7 @@ export default function NavBar() {
         </Link>
         <a
           href="/activités"
-          className="text-sm font-bold text-blue-600 hover:text-blue-900  bg-white"
+          className="text-sm font-bold text-blue-600 hover:text-blue-900 bg-white p-1 rounded"
         >
           Activités
         </a>
@@ -64,24 +67,28 @@ export default function NavBar() {
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-gray-300 shadow-lg flex flex-col p-4 space-y-3 md:hidden">
           <MainNav />
-          <Button
-            onClick={() => {
-              router.push("/register");
-              setMenuOpen(false);
-            }}
-            className="bg-white text-blue-600 w-full"
-          >
-            S&apos;inscrire
-          </Button>
-          <Button
-            onClick={() => {
-              router.push("/login");
-              setMenuOpen(false);
-            }}
-            className="bg-white text-blue-600 w-full"
-          >
-            Se connecter
-          </Button>
+          {!isAuthenticated && (
+            <>
+              <Button
+                onClick={() => {
+                  router.push("/register");
+                  setMenuOpen(false);
+                }}
+                className="bg-white text-blue-600 w-full"
+              >
+                S&apos;inscrire
+              </Button>
+              <Button
+                onClick={() => {
+                  router.push("/login");
+                  setMenuOpen(false);
+                }}
+                className="bg-white text-blue-600 w-full"
+              >
+                Se connecter
+              </Button>
+            </>
+          )}
         </div>
       )}
 
@@ -100,7 +107,6 @@ export default function NavBar() {
                 height={32}
                 className="w-8 h-8 rounded-full object-cover"
               />
-
               <span>{user.name}</span>
             </Button>
           </DropdownMenuTrigger>
@@ -109,15 +115,12 @@ export default function NavBar() {
               <DropdownMenuLabel>
                 <div className="flex items-center space-x-2">
                   <Image
-                    src={
-                      user.photo && user.photo !== "" ? user.photo : "/R.png"
-                    }
+                    src={user.photo && user.photo !== "" ? user.photo : "/R.png"}
                     alt={`Photo de ${user.name}`}
                     width={32}
                     height={32}
                     className="w-8 h-8 rounded-full object-cover"
                   />
-
                   <div>
                     <p className="font-semibold">{user.name}</p>
                     <p className="text-sm text-gray-500">
@@ -140,6 +143,7 @@ export default function NavBar() {
           </DropdownMenuPortal>
         </DropdownMenu>
       ) : (
+        // Boutons "Se connecter" et "S'inscrire" uniquement si l'utilisateur n'est pas connecté
         <div className="hidden md:flex space-x-3">
           <Button
             onClick={() => router.push("/register")}
