@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ComputerIcon, IdCard, Users } from "lucide-react";
+import { ComputerIcon, Users } from "lucide-react";
 import Link from "next/link";
 import { useContext } from "react";
 import { AuthContext } from "@/components/AuthContext";
@@ -75,15 +75,14 @@ export default function Home() {
                 <Card className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                     
-                      <IdCard className="h-6 w-6"  />
+                      <ComputerIcon className="h-6 w-6" />
                       Carte de Membre
                     </CardTitle>
-                    <CardDescription>Votre carte  </CardDescription>
+                    <CardDescription>Votre carte d'adehe </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Button asChild className="w-full">
-                      <Link href="/dashboard/espace-user/carte">Accéder</Link>
+                      <Link href="/dashboard/espace-user/votes">Accéder</Link>
                     </Button>
                   </CardContent>
                 </Card>

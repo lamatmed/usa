@@ -75,7 +75,7 @@ export default function Home() {
                 <Card className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                     
+                      <ComputerIcon className="h-6 w-6" />
                       <IdCard className="h-6 w-6"  />
                       Carte de Membre
                     </CardTitle>
