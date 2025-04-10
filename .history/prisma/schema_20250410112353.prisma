@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id        String   @id @default(cuid())
+  nni       String   @unique
+  password  String
+  name      String
+  role      Role     @default(USER)
+
+  address   String?
+  job       String?
+  domain    String?
+  cv        String?   // Stocke un lien vers le CV ou un fichier
+  photo     String?   // Stocke un lien vers la photo de profil
+  votes     Vote[]    // Relation avec le modèle Vote
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Vote {
+  id            String     @id @default(cuid())
+  userId        String     @unique // Un utilisateur ne peut voter qu'une fois
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  choiceId      String     // Référence à VoteOption
+  choiceOption  VoteOption @relation("VoteOptionVotes", fields: [choiceId], references: [id], onDelete: Cascade) // Relation avec VoteOption
+  createdAt     DateTime   @default(now())
+}
+
+model VoteOption {
+  id        String   @id @default(cuid())
+  label     String   @unique
+  votes     Vote[]   @relation("VoteOptionVotes") // Relation inverse avec Vote
+}
+
