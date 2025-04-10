@@ -74,45 +74,28 @@ const UsersPage = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
   
-    // Titre principal
-    doc.setFontSize(16);
-    doc.text("Liste des membres de l'union sortants", 14, 20);
+    const sortants = users.filter((u) => u.role === "USER"); // Remplace par ta condition réelle pour les "sortants"
   
-    // Date de génération
-    const today = new Date();
-    const dateStr = today.toLocaleDateString("fr-FR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-    doc.setFontSize(10);
-    doc.text(`Date de génération : ${dateStr}`, 14, 28);
-  
-    // Espacement avant le tableau
-    const startY = 35;
-  
-    const tableData = users.map((user, index) => [
+    const tableData = sortants.map((user, index) => [
       index + 1,
       user.name,
       user.nni,
       user.job,
+      user.role,
     ]);
   
     autoTable(doc, {
-      startY,
-      head: [["#", "Nom", "Téléphone", "Métier"]],
+      head: [["#", "Nom", "Téléphone", "Métier", "Rôle"]],
       body: tableData,
     });
   
-    doc.save("membres_union_sortants.pdf");
+    doc.save("membres_sortants.pdf");
   };
-  
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4 text-center">Gestion des Utilisateurs</h1>
-      <Button className="mb-4" onClick={() => generatePDF()}>
-  Exporter les membres en PDF
-</Button>
+      
       <input
         type="text"
         className="border p-2 rounded w-full mb-4"

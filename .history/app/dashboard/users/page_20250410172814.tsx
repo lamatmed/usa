@@ -95,12 +95,12 @@ const UsersPage = () => {
       index + 1,
       user.name,
       user.nni,
-      user.job,
+      user.role,
     ]);
   
     autoTable(doc, {
       startY,
-      head: [["#", "Nom", "Téléphone", "Métier"]],
+      head: [["#", "Nom", "Téléphone", "Rôle"]],
       body: tableData,
     });
   

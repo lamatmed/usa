@@ -95,7 +95,7 @@ const UsersPage = () => {
       index + 1,
       user.name,
       user.nni,
-      user.job,
+      user.role,
     ]);
   
     autoTable(doc, {
