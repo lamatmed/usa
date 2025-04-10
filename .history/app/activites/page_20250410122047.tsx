@@ -33,7 +33,7 @@ export default function ActivitiesPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Activités de l&lsquo;Union des Sortants d&apos;Algérie
+        Activités de lUnion des Sortants d&apos;Algérie
       </motion.h1>
 
       <motion.p

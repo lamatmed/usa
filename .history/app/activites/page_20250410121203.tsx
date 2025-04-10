@@ -33,7 +33,7 @@ export default function ActivitiesPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Activités de l&lsquo;Union des Sortants d&apos;Algérie
+        Activités de l'Union des Sortants d&apos;Algérie
       </motion.h1>
 
       <motion.p
@@ -42,7 +42,7 @@ export default function ActivitiesPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
       >
-        Découvrez les prochaines activités organisées par l&lsquo;Union, incluant des séminaires, forums et webinaires sur des sujets clés.
+        Découvrez les prochaines activités organisées par l'Union, incluant des séminaires, forums et webinaires sur des sujets clés.
       </motion.p>
 
       <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
