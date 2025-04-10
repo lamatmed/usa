@@ -162,18 +162,6 @@ export default function RegisterPage() {
                     className="pl-10"
                   />
                 </div>
-                <div className="relative flex flex-col items-center p-3 border border-gray-300 rounded-lg shadow-sm bg-white w-full max-w-xs">
-                  {/* Label avec icône et texte */}
-                  <label className="flex items-center space-x-2 text-gray-700 font-medium">
-                    <CameraIcon className="w-5 h-5 text-blue-500" />
-                    <span>Photo de profil</span>
-                  </label>
-
-                  {/* Composant Uploader */}
-                  <Uploader
-                    onUpload={(url) => setUser({ ...userp, photo: url })}
-                  />
-                </div>
               </>
             )}
 
