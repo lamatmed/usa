@@ -29,7 +29,7 @@ const navigation: Navigation = {
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
     
     { name: "Mon espace", href: "/dashboard/espace-user", icon: ComputerIcon},
-    { name: "Mombres", href: "/dashboard/users", icon: Users },
+    { name: "tilisateurs", href: "/dashboard/users", icon: Users },
     { name: "Election", href: "/dashboard/config-vote", icon: Clipboard },
   ],
   USER: [

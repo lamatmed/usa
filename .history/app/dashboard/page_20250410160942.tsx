@@ -14,7 +14,7 @@ export default function Home() {
   const { user } = useContext(AuthContext) ?? {};
   const router = useRouter();
   // Rediriger les utilisateurs non connectés vers /login
-
+  useEffect(() => {
     
 
   // Si user est null ou undefined, ne pas afficher la page (évite le clignotement)

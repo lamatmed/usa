@@ -7,7 +7,7 @@ import { AuthContext } from "@/components/AuthContext"
 import { cn } from "@/lib/utils"
 import { 
   Users, 
-  Clipboard,
+
   ComputerIcon ,
   LayoutDashboard 
 } from "lucide-react"
@@ -29,8 +29,8 @@ const navigation: Navigation = {
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
     
     { name: "Mon espace", href: "/dashboard/espace-user", icon: ComputerIcon},
-    { name: "Mombres", href: "/dashboard/users", icon: Users },
-    { name: "Election", href: "/dashboard/config-vote", icon: Clipboard },
+    { name: "Les utilisateurs", href: "/dashboard/users", icon: Users },
+    { name: "Les ", href: "/dashboard/users", icon: Users },
   ],
   USER: [
     { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },

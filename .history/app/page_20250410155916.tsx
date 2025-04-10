@@ -17,7 +17,7 @@ export default function Hero() {
           alt="Uda"
           width={256}  // Provide width for optimization
           height={256} // Provide height for optimization
-         // Use intrinsic layout for responsive image
+          layout="intrinsic" // Use intrinsic layout for responsive image
           className="rounded-full shadow-lg"
       
         />

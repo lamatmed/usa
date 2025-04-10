@@ -21,10 +21,9 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      router.push("/dashboard");
+      router.push("/");
     }
   }, [user, router]);
-  
 
   const handleLogin = async () => {
     setLoading(true);

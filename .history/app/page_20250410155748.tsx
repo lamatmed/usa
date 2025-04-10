@@ -14,10 +14,10 @@ export default function Hero() {
       >
         <Image
           src="/uda.jpg" // Remplace avec l'URL de ton image
-          alt="Uda"
+          alt="Illustration d'un business en croissance"
           width={256}  // Provide width for optimization
           height={256} // Provide height for optimization
-         // Use intrinsic layout for responsive image
+          layout="intrinsic" // Use intrinsic layout for responsive image
           className="rounded-full shadow-lg"
       
         />
