@@ -30,9 +30,14 @@ export default function NavBar() {
 
   return (
     <nav
-    className="p-4 h-24 bg-gray-300 shadow-md flex items-center justify-between bg-cover bg-center bg-no-repeat"
-    style={{ backgroundImage: "url('/rimalge.jpg')" }}
-
+    className="p-4 bg-gray-300 shadow-md flex items-center justify-between"
+    style={{
+      backgroundImage: "url('/R.png')",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: "150px", // 🎯 ajuste ici la taille exacte que tu veux
+      height: "100px", // ✅ utile pour donner une hauteur fixe si tu veux centrer proprement
+    }}
   >
       {/* Logo + Menu mobile */}
       <div className="flex items-center space-x-4">

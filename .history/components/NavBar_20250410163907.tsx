@@ -30,10 +30,9 @@ export default function NavBar() {
 
   return (
     <nav
-    className="p-4 h-24 bg-gray-300 shadow-md flex items-center justify-between bg-cover bg-center bg-no-repeat"
-    style={{ backgroundImage: "url('/rimalge.jpg')" }}
-
-  >
+      className="p-4 bg-gray-300 shadow-md flex items-center justify-between"
+    
+    >
       {/* Logo + Menu mobile */}
       <div className="flex items-center space-x-4">
         <Link href="/">
