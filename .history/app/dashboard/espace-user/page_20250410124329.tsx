@@ -2,26 +2,21 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ComputerIcon, Users } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ComputerIcon, IdCard, Users } from "lucide-react";
 import Link from "next/link";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "@/components/AuthContext";
-import { useRouter } from "next/navigation";
-import { FiClipboard } from "react-icons/fi";
+import { FaVoteYea } from "react-icons/fa";
 
 export default function Home() {
   const { user } = useContext(AuthContext) ?? {};
-  const router = useRouter();
-  // Rediriger les utilisateurs non connectés vers /login
-  useEffect(() => {
-    if (!user) {
-      router.push("/");
-    }
-  }, [user, router]);
-
-  // Si user est null ou undefined, ne pas afficher la page (évite le clignotement)
-  if (!user) return null;
   return (
     <main className="min-h-screen bg-gradient-to-b from-green-300 to-green-700 dark:from-gray-900 dark:to-gray-800 flex flex-col">
       <div className="container mx-auto px-4 py-12 flex-1">
@@ -32,7 +27,7 @@ export default function Home() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-3">
-            Union des Sortants  d&apos;Algérie
+            Union des Sortants d&apos;Algérie
           </h1>
           <p className="text-lg text-gray-700 dark:text-gray-300">
             Gérez efficacement votre espace.
@@ -41,20 +36,20 @@ export default function Home() {
 
         {/* Grid Responsive */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {user?.role === "ADMIN" && (
+          {user && (
             <>
               <motion.div whileHover={{ scale: 1.05 }}>
                 <Card className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Users className="h-6 w-6 text-blue-500" />
-                      Utilisateurs
+                      <FaRegUser className="h-6 w-6" />
+                      Modifier le profil
                     </CardTitle>
-                    <CardDescription>Gestion des utilisateurs</CardDescription>
+                    <CardDescription>Gérer mon profil</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Button asChild className="w-full">
-                      <Link href="/dashboard/users">Accéder</Link>
+                      <Link href="/dashboard/espace-user/update">Accéder</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -64,44 +59,40 @@ export default function Home() {
                 <Card className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-
-                      <FiClipboard className="h-6 w-6 text-green-500" /> Créer Election
+                      <FaVoteYea className="h-6 w-6" />
+                      Eléctions du Bureau
                     </CardTitle>
-                    <CardDescription>Elections et votes</CardDescription>
+                    <CardDescription>Voter aux élections </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Button asChild className="w-full">
-                      <Link href="/dashboard/config-vote">Accéder</Link>
+                      <Link href="/dashboard/espace-user/votes">Accéder</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.05 }}>
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                     
+                      <IdCard className="h-6 w-6"  />
+                      Carte de Membre
+                    </CardTitle>
+                    <CardDescription>Votre carte  </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button asChild className="w-full">
+                      <Link href="/dashboard/espace-user/carte">Accéder</Link>
                     </Button>
                   </CardContent>
                 </Card>
               </motion.div>
             </>
           )}
-
-
-          {/* Carte Produits */}
-          <motion.div whileHover={{ scale: 1.05 }}>
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-
-                  <ComputerIcon className="h-6 w-6" />
-                  Espace
-                </CardTitle>
-                <CardDescription>Gérez mon espace</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button asChild className="w-full">
-                  <Link href="/dashboard/espace-user">Accéder</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
         </div>
       </div>
-
-
     </main>
   );
 }
