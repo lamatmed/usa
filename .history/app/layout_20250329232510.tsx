@@ -11,7 +11,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Union des Sortants  d'Algérie",
   description: "Application",
-  icons: "/R.png",
 };
 
 export default function RootLayout({
