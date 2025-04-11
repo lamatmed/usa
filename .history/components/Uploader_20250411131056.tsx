@@ -34,7 +34,7 @@ export default function Uploader({ onUpload }: UploaderProps) {
         <div className="relative group">
           <Image
             src={uploadedUrl}
-            alt="Image du profile"
+            alt="Image du "
             width={150}
             height={150}
             className="w-36 h-36 object-cover rounded-lg shadow-md border border-gray-300"

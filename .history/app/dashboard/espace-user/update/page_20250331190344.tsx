@@ -14,11 +14,9 @@ import { AuthContext } from "@/components/AuthContext";
 import { motion } from "framer-motion";
 
 import { updateUser } from "@/utils/actions"; // Import de l'action de mise à jour
-import { Pencil, User, Camera, CameraIcon } from "lucide-react";
+import { Pencil, User } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
- // Import de l'icône Camera
-import Uploader from "@/components/Uploader"; // Assurez-vous que le composant Uploader soit correctement importé
 
 const UserProfile = () => {
   const { user } = useContext(AuthContext) ?? {};
@@ -30,6 +28,7 @@ const UserProfile = () => {
     nni: string;
     password: string;
     confirmPassword: string;
+
     address: string;
     job: string;
     domain: string;
@@ -41,6 +40,7 @@ const UserProfile = () => {
     nni: "",
     password: "",
     confirmPassword: "",
+
     address: "",
     job: "",
     domain: "",
@@ -56,6 +56,7 @@ const UserProfile = () => {
         nni: user.nni || "",
         password: "",
         confirmPassword: "",
+
         address: user.address || "",
         job: user.job || "",
         domain: user.domain || "",
@@ -65,7 +66,9 @@ const UserProfile = () => {
     }
   }, [user]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setUser((prev) => ({ ...prev, [name]: value }));
   };
@@ -79,9 +82,8 @@ const UserProfile = () => {
         job: userp.job,
         domain: userp.domain,
         cv: userp.cv,
-        photo: userp.photo, // La photo est déjà mise à jour ici
+        photo: userp.photo,
       });
-
       toast({
         title: "Mise à jour réussie",
         description: "Vos informations ont été mises à jour avec succès.",
@@ -102,7 +104,7 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-6 max-w-2xl mx-auto ">
       <h1 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-2">
         <User className="w-6 h-6" /> Modifier le profil
       </h1>
@@ -185,19 +187,6 @@ const UserProfile = () => {
                 />
               </div>
             )}
-
-            <div className="relative flex flex-col items-center p-3 border border-gray-300 rounded-lg shadow-sm bg-white w-full max-w-xs mt-4">
-              {/* Label avec icône et texte */}
-              <label className="flex items-center space-x-2 text-gray-700 font-medium">
-                <CameraIcon className="w-5 h-5 text-blue-500" />
-                <span>Photo de profil</span>
-              </label>
-
-              {/* Composant Uploader */}
-              <Uploader
-                onUpload={(url) => setUser({ ...userp, photo: url })} // Met à jour la photo de profil
-              />
-            </div>
           </CardHeader>
 
           <CardContent className="text-center flex justify-center gap-2">

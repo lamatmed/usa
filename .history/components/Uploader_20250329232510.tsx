@@ -3,7 +3,6 @@ import { UploadButton } from "@uploadthing/react";
 import type { OurFileRouter } from "@/app/api/uploadthing/core";
 import Image from "next/image";
 import {  XCircle } from "lucide-react";
-import { Button } from "./ui/button";
 
 interface UploaderProps {
   onUpload: (url: string) => void;
@@ -34,7 +33,7 @@ export default function Uploader({ onUpload }: UploaderProps) {
         <div className="relative group">
           <Image
             src={uploadedUrl}
-            alt="Image du profile"
+            alt="Image du produit"
             width={150}
             height={150}
             className="w-36 h-36 object-cover rounded-lg shadow-md border border-gray-300"
@@ -42,12 +41,12 @@ export default function Uploader({ onUpload }: UploaderProps) {
           />
 
           {/* Bouton pour supprimer l'image */}
-          <Button
+          <button
             onClick={() => setUploadedUrl(null)}
             className="absolute top-0 right-0 p-1 bg-red-600 text-white rounded-full opacity-80 hover:opacity-100 transition duration-200"
           >
             <XCircle className="w-5 h-5" />
-          </Button>
+          </button>
         </div>
       )}
     </div>

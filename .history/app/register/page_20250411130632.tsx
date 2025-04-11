@@ -14,10 +14,10 @@ import { AuthContext } from "@/components/AuthContext";
 import { motion } from "framer-motion";
 
 import { updateUser } from "@/utils/actions"; // Import de l'action de mise à jour
-import { Pencil, User, Camera, CameraIcon } from "lucide-react";
+import { Pencil, User, Camera } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
- // Import de l'icône Camera
+; // Import de l'icône Camera
 import Uploader from "@/components/Uploader"; // Assurez-vous que le composant Uploader soit correctement importé
 
 const UserProfile = () => {
