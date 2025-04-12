@@ -145,7 +145,7 @@ export default function RegisterPage() {
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-500" />
                   <Input
-                    type="number"
+                    T
                     name="nni"
                     placeholder="Numéro Téléphone"
                     onChange={handleChange}
