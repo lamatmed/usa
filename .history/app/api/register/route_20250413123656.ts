@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     });
 
     if (existingUser) {
-      return NextResponse.json({ error: "Le numero est déjà utilisé" }, { status: 400 });
+      return NextResponse.json({ error: "Le n est déjà utilisé" }, { status: 400 });
     }
 
     // Hash du mot de passe

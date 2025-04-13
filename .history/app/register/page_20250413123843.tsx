@@ -69,7 +69,7 @@ export default function RegisterPage() {
     if (!userp.nni) {
       toast({
         title: "Erreur",
-        description: "Le numéro téléphone est obligatoire.",
+        description: "Le numero telephone est obligatoire.",
         variant: "destructive",
       });
       setLoading(false);

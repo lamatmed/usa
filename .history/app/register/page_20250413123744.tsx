@@ -66,15 +66,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    if (!userp.nni) {
-      toast({
-        title: "Erreur",
-        description: "Le numéro téléphone est obligatoire.",
-        variant: "destructive",
-      });
-      setLoading(false);
-      return;
-    }
+    
 
     if (userp.password !== userp.confirmPassword) {
       toast({
