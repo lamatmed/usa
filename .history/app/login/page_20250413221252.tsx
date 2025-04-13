@@ -65,9 +65,7 @@ const Login = () => {
           text: data.message,
           icon: "error",
           confirmButtonText: "OK",
-          customClass: {
-            confirmButton: 'swal-button-ok'
-          },
+          
         });
       }
     } catch (error) {

@@ -74,9 +74,6 @@ export default function RegisterPage() {
         text: "Le numéro de téléphone est obligatoire.",
         icon: "error",
         confirmButtonText: "OK",
-        customClass: {
-          confirmButton: 'swal-button-ok'
-        },
       });
       setLoading(false);
       return;
@@ -88,9 +85,6 @@ export default function RegisterPage() {
         text: "Les mots de passe ne correspondent pas.",
         icon: "error",
         confirmButtonText: "OK",
-        customClass: {
-          confirmButton: 'swal-button-ok'
-        },
       });
       setLoading(false);
       return;
@@ -113,9 +107,7 @@ export default function RegisterPage() {
         text: `Bienvenue ${newUser.name} !`,
         icon: "success",
         confirmButtonText: "Se connecter",
-        customClass: {
-          confirmButton: 'swal-button-ok'
-        },
+        
       });
 
       router.push("/login");
