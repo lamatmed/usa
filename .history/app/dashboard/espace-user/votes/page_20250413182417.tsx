@@ -140,12 +140,7 @@ const VotePage = () => {
               ))
             )}
           </CardContent>
-           <Button
-                    className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300 w-full sm:w-auto"
-                    onClick={() => router.push("/dashboard")}
-                  >
-                    Retour
-                  </Button>
+          
         </Card>
 
         {/* Affichage des résultats */}

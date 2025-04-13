@@ -39,7 +39,7 @@ const MembershipCard = () => {
   const membershipNumber = `CS-${user.nni.slice(-4)}-${user.id.slice(0, 4)}`;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-teal-400 to-blue-500 p-4 sm:p-8">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-teal-400 to-blue-500 p-8">
       <Card
         ref={cardRef}
         className="shadow-2xl border rounded-xl p-6 bg-white text-black w-full max-w-md relative overflow-hidden"
@@ -62,7 +62,7 @@ const MembershipCard = () => {
         </CardContent>
       </Card>
 
-      <div className="mt-6 flex flex-col sm:flex-row gap-4 w-full">
+      <div className="mt-6 flex gap-4">
         <Button
           className="bg-teal-700 text-white px-6 py-3 rounded-lg hover:bg-teal-900 transition duration-300 w-full sm:w-auto"
           onClick={() => handlePrint()}
@@ -77,7 +77,6 @@ const MembershipCard = () => {
         </Button>
       </div>
     </div>
-
   );
 };
 
