@@ -49,7 +49,7 @@ export default function Hero() {
 
       <motion.a
         href="/login"
-        className="mt-8 inline-block px-8 py-3 bg-white text-emerald-600 font-semibold rounded-full shadow-lg hover:text-blue-900 transition-transform transform hover:scale-105"
+        className="mt-8 inline-block px-8 py-3 bg-white text-emerald-600 font-semibold rounded-full shadow-lg hover:bg-blue-400 transition-transform transform hover:scale-105"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
