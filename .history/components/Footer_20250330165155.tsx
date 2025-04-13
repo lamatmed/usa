@@ -11,7 +11,7 @@ const Footer = () => {
       transition={{ duration: 0.6 }}
       className="w-full py-6 bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-md mt-8"
       style={{
-        backgroundImage: "url('/')", // Remplace par ton image
+        backgroundImage: "url('/uda.jpg')", // Remplace par ton image
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
