@@ -41,7 +41,7 @@ export default function NavBar() {
       {/* Logo + Menu mobile */}
       <div className="flex items-center space-x-4">
         <Link href="/">
-          <Image src={"/union.jpg"} alt="logo" width={70} height={70} />
+          <Image src={"/union.jpg"} alt="logo" width={60} height={60} />
         </Link>
         <a
           href="/activites"
