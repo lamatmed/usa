@@ -46,7 +46,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mt-4 text-lg md:text-xl lg:text-2xl text-white/90 py-10"
+          className="mt-4 text-lg md:text-xl lg:text-2xl text-white/90 mt-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}

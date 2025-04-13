@@ -45,14 +45,7 @@ export default function Hero() {
           Union des Sortants d&apos;Algérie
         </motion.h1>
 
-        <motion.p
-          className="mt-4 text-lg md:text-xl lg:text-2xl text-white/90 py-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-        >
-         
-        </motion.p>
+       
 
         <motion.a
           href="/login"

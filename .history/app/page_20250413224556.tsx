@@ -12,6 +12,7 @@ export default function Hero() {
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 1000);
+
     return () => clearTimeout(timeout);
   }, []);
 
@@ -20,8 +21,8 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center text-center overflow-hidden bg-gradient-to-br from-green-600 via-emerald-500 to-lime-400">
-      {/* Image affichée entièrement avec fond visible autour si besoin */}
+    <section className="relative w-full min-h-screen flex items-center justify-center text-center overflow-hidden bg-black ">
+      {/* Image plein écran sans être coupée */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/uda.jpg"
@@ -30,11 +31,11 @@ export default function Hero() {
           priority
           className="object-contain w-full h-full"
         />
-        {/* Optionnel : overlay pour améliorer la lisibilité du texte */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Overlay sombre facultatif (peut être supprimé si tu veux voir la photo en détail) */}
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      {/* Contenu au-dessus de l'image */}
+      {/* Contenu par-dessus l'image */}
       <div className="relative z-10 px-4 md:px-10 text-white max-w-3xl">
         <motion.h1
           className="text-3xl md:text-5xl lg:text-6xl font-extrabold drop-shadow-xl"
@@ -46,12 +47,12 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mt-4 text-lg md:text-xl lg:text-2xl text-white/90 py-10"
+          className="mt-4 text-lg md:text-xl lg:text-2xl text-white/90"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-         
+          Rôle des diplômés dans le développement socio-économique, opportunités de coopération bilatérale et plus encore.
         </motion.p>
 
         <motion.a
