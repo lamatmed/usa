@@ -28,9 +28,8 @@ type Activity = {
     title: string;
     description: string;
     date: string | Date;
-    imageUrl: string | null | undefined;  // Accepter null et undefined
+    imageUrl?: string;
 };
-
 
 
 export default function ManageActivitiesPage() {
@@ -230,10 +229,7 @@ export default function ManageActivitiesPage() {
                                 <Image
                                     src={activity.imageUrl}
                                     alt="Illustration de l'activité"
-                                    className="w-full h-40 object-cover rounded-md border mb-4" // Ajuste la hauteur
-                                    width={600} // Largeur maximale
-                                    height={240} // Hauteur définie
-                                    layout="responsive" // Responsive pour une meilleure gestion de la taille
+                                    className="w-full max-h-64 object-cover rounded-md border"
                                 />
                             )}
 

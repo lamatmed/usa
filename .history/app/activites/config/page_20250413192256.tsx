@@ -28,9 +28,8 @@ type Activity = {
     title: string;
     description: string;
     date: string | Date;
-    imageUrl: string | null | undefined;  // Accepter null et undefined
+    imageUrl?: string;
 };
-
 
 
 export default function ManageActivitiesPage() {
@@ -88,7 +87,7 @@ export default function ManageActivitiesPage() {
             await createActivity(newActivity);
             const updated = await getAllActivities();
             setActivities(updated);
-            setNewActivity({ title: "", description: "", date: "", imageUrl:"" });
+            setNewActivity({ title: "", description: "", date: "" });
             Swal.fire({
                 title: "Succès",
                 text: "L'activité a été ajoutée.",
@@ -114,8 +113,7 @@ export default function ManageActivitiesPage() {
             const updated = await getAllActivities();
             setActivities(updated);
             setEditingId(null);
-            setNewActivity({ title: "", description: "", date: "", imageUrl: "" });
-
+            setNewActivity({ title: "", description: "", date: "" });
             Swal.fire({
                 title: "Succès",
                 text: "L'activité a été mise à jour.",
@@ -230,10 +228,7 @@ export default function ManageActivitiesPage() {
                                 <Image
                                     src={activity.imageUrl}
                                     alt="Illustration de l'activité"
-                                    className="w-full h-40 object-cover rounded-md border mb-4" // Ajuste la hauteur
-                                    width={600} // Largeur maximale
-                                    height={240} // Hauteur définie
-                                    layout="responsive" // Responsive pour une meilleure gestion de la taille
+                                    className="w-full max-h-64 object-cover rounded-md border"
                                 />
                             )}
 
@@ -260,12 +255,12 @@ export default function ManageActivitiesPage() {
                                         onClick={() => {
                                             setEditingId(activity.id);
                                             setNewActivity({
+                                                imageUrl:
                                                 title: activity.title,
                                                 description: activity.description,
                                                 date: new Date(activity.date).toISOString().split("T")[0],
-                                                imageUrl: activity.imageUrl ?? "", // 👈 ajoute une valeur par défaut si undefined
+                                                
                                             });
-
                                         }}
                                     >
                                         <Pencil className="w-4 h-4" />

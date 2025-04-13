@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { getAllActivities } from "@/utils/actions";
 import Loader from "@/components/Loader";
-import Image from "next/image";
 
 const ActivitiesPage = () => {
   const [activities, setActivities] = useState<any[]>([]);
@@ -80,9 +79,6 @@ const ActivitiesPage = () => {
                       src={activity.imageUrl}
                       alt={activity.title}
                       className="w-full h-40 object-cover rounded-md mb-4"
-                      width={600} // Largeur de l'image
-                      height={240} // Hauteur de l'image
-                      layout="responsive" // Cela rend l'image responsive tout en conservant les proportions
                     />
                   )}
                   <h3 className="text-xl font-semibold mb-4 text-purple-700">{activity.title}</h3>
