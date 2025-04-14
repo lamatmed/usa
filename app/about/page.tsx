@@ -53,7 +53,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">À propos de l'Union</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">À propos de l&apos;Union</h2>
         <p className="mb-4">
           L&apos;Union des Sortants d&apos;Algérie (USA) est une organisation regroupant les diplômés mauritaniens ayant poursuivi leurs études supérieures en Algérie.
         </p>
