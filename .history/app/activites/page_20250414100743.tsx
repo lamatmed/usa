@@ -131,7 +131,7 @@ const ActivitiesPage = () => {
                 </div>
                 <div className="p-4">
                   <button
-                    onClick={() => router.push(`/activites/${activity.id}`)}
+                    onClick={() => router.push(`/activities/${activity.id}`)}
                     className="w-full py-2 px-4 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
                   >
                     Voir plus
