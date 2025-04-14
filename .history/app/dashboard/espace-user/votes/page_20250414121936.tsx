@@ -154,7 +154,7 @@ const VotePage = () => {
           </CardContent>
            <Button
                     className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300 w-full sm:w-auto"
-            onClick={() => router.push("/dashboard/espace-user")}
+            onClick={() => router.push("/dashboard/dashboard/espace-user")}
                   >
                     Retour
                   </Button>
