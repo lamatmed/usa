@@ -55,13 +55,13 @@ export default function Hero() {
       >
         <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">À propos de l'Union</h2>
         <p className="mb-4">
-          L&apos;Union des Sortants d&apos;Algérie (USA) est une organisation regroupant les diplômés mauritaniens ayant poursuivi leurs études supérieures en Algérie.
+          L’Union des Sortants d’Algérie (USA) est une organisation regroupant les diplômés mauritaniens ayant poursuivi leurs études supérieures en Algérie.
         </p>
         <p className="mb-4">
-          Elle a pour mission de renforcer les liens d&apos;amitié et de solidarité entre les anciens étudiants, de valoriser les parcours, et de contribuer activement au développement de la Mauritanie à travers l&apos;expertise acquise en Algérie.
+          Elle a pour mission de renforcer les liens d’amitié et de solidarité entre les anciens étudiants, de valoriser les parcours, et de contribuer activement au développement de la Mauritanie à travers l’expertise acquise en Algérie.
         </p>
         <p>
-          L&apos;union vise également à favoriser la coopération entre les deux pays, encourager les initiatives collectives et offrir un cadre d&apos;échange et d&apos;entraide entre professionnels mauritaniens formés en Algérie.
+          L’union vise également à favoriser la coopération entre les deux pays, encourager les initiatives collectives et offrir un cadre d’échange et d’entraide entre professionnels mauritaniens formés en Algérie.
         </p>
       </motion.div>
 

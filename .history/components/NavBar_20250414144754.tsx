@@ -25,7 +25,7 @@ export default function NavBar() {
 
   function handleLogout() {
     logout();
-    router.push("/");
+    router.push("/login");
   }
 
   return (
@@ -126,7 +126,7 @@ export default function NavBar() {
                     <p className="font-semibold">{user.name}</p>
                     {user.role === "ADMIN" && (
                       <p className="text-sm text-gray-500">
-                        Connecté en tant qu&apos;ADMIN
+                        Connecté en tant queADMIN
                       </p>
                     )}
                   </div>

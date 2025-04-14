@@ -25,7 +25,7 @@ export default function NavBar() {
 
   function handleLogout() {
     logout();
-    router.push("/");
+    router.push("/login");
   }
 
   return (

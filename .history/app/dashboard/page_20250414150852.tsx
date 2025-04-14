@@ -69,7 +69,7 @@ export default function Home() {
                 href="/activites/config"
                 icon={<NotebookPen className="h-6 w-6 text-purple-500" />}
                 title="Activités"
-                description="Ajouter et modifier les activités"
+                description="Ajouter et modifier les activités p"
                 ringColor="ring-purple-300 dark:ring-purple-500"
               />
             </>

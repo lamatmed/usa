@@ -25,7 +25,7 @@ export default function NavBar() {
 
   function handleLogout() {
     logout();
-    router.push("/");
+    router.push("/login");
   }
 
   return (
@@ -44,10 +44,10 @@ export default function NavBar() {
           <Image src={"/union.jpg"} alt="logo" width={60} height={60} />
         </Link>
         <Link
-          href="/about"
+          href="/"
           className="text-sm font-bold text-blue-600 hover:text-blue-900 bg-white p-1 rounded"
         >
-          À propos
+          Activités
         </Link>
 
         {/* Bouton Menu Mobile */}
@@ -124,13 +124,10 @@ export default function NavBar() {
                   />
                   <div>
                     <p className="font-semibold">{user.name}</p>
-                    {user.role === "ADMIN" && (
-                      <p className="text-sm text-gray-500">
-                        Connecté en tant qu&apos;ADMIN
-                      </p>
-                    )}
+                    <p className="text-sm text-gray-500">
+                      Connecté en tant que {user.role}
+                    </p>
                   </div>
-
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
