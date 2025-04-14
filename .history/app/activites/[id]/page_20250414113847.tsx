@@ -6,7 +6,6 @@ import { getActivityById } from "@/utils/actions"; // Fonction pour récupérer 
 import Loader from "@/components/Loader";
 import Image from "next/image";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
 
 const ActivityPage = () => {
     const [activity, setActivity] = useState<any>(null);
@@ -35,7 +34,7 @@ const ActivityPage = () => {
     if (!activity) {
         return (
             <div className="text-center text-xl text-red-600">
-                L&apos;activité n&apos;a pas été trouvée.
+                L'activité n&apos;a pas été trouvée.
             </div>
         );
     }

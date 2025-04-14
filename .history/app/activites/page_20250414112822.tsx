@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { getAllActivities } from "@/utils/actions";
 import Loader from "@/components/Loader";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 
 const ITEMS_PER_PAGE = 6;
 

@@ -35,7 +35,7 @@ const ActivityPage = () => {
     if (!activity) {
         return (
             <div className="text-center text-xl text-red-600">
-                L&apos;activité n&apos;a pas été trouvée.
+                L'activité n&apos;a pas été trouvée.
             </div>
         );
     }

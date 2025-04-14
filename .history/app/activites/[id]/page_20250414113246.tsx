@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation"; // Utilisation de useParams
-import { getActivityById } from "@/utils/actions"; // Fonction pour récupérer l'activité par ID
+import { useRouter } from "next/navigation";
+import { getActivityById } from "@/utils/actions"; // Assurez-vous d'avoir une fonction pour récupérer l'activité par son ID.
 import Loader from "@/components/Loader";
 import Image from "next/image";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
 
 const ActivityPage = () => {
     const [activity, setActivity] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const { id } = useParams(); // Utilisation de useParams pour obtenir l'ID depuis l'URL
+    const router = useRouter();
+    const { id } = router.query; // Récupère l'ID de l'URL
 
     useEffect(() => {
         if (id) {
@@ -35,7 +35,7 @@ const ActivityPage = () => {
     if (!activity) {
         return (
             <div className="text-center text-xl text-red-600">
-                L&apos;activité n&apos;a pas été trouvée.
+                L'activité n'a pas été trouvée.
             </div>
         );
     }
@@ -73,12 +73,12 @@ const ActivityPage = () => {
 
                 {/* Autres informations ou actions supplémentaires */}
                 <div className="mt-8">
-                    <Button
-                        onClick={() => window.history.back()} // Retour à la page précédente
+                    <button
+                        onClick={() => router.push("/activites")}
                         className="py-2 px-4 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
                     >
                         Retour aux activités
-                    </Button>
+                    </button>
                 </div>
             </div>
         </section>

@@ -35,7 +35,7 @@ const ActivityPage = () => {
     if (!activity) {
         return (
             <div className="text-center text-xl text-red-600">
-                L&apos;activité n&apos;a pas été trouvée.
+                L'activité n&apos;a pas été trouvée.
             </div>
         );
     }
@@ -73,12 +73,12 @@ const ActivityPage = () => {
 
                 {/* Autres informations ou actions supplémentaires */}
                 <div className="mt-8">
-                    <Button
+                    <Buttonutton
                         onClick={() => window.history.back()} // Retour à la page précédente
                         className="py-2 px-4 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
                     >
                         Retour aux activités
-                    </Button>
+                    </Buttonutton>
                 </div>
             </div>
         </section>

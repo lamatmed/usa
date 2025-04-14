@@ -43,12 +43,12 @@ export default function NavBar() {
         <Link href="/">
           <Image src={"/union.jpg"} alt="logo" width={60} height={60} />
         </Link>
-        <Link
+        <LO
           href="/activites"
           className="text-sm font-bold text-blue-600 hover:text-blue-900 bg-white p-1 rounded"
         >
           Activités
-        </Link>
+        </LO>
 
         {/* Bouton Menu Mobile */}
         <button
