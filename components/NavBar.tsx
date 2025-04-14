@@ -47,7 +47,7 @@ export default function NavBar() {
           href="/about"
           className="text-sm font-bold text-blue-600 hover:text-blue-900 bg-white p-1 rounded"
         >
-          Nous?
+          Qui sommes-nous ?
         </Link>
 
         {/* Bouton Menu Mobile */}
