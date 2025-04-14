@@ -94,9 +94,6 @@ export default function ManageActivitiesPage() {
                 text: "L'activité a été ajoutée.",
                 icon: "success",
                 confirmButtonText: "OK",
-                customClass: {
-                    confirmButton: 'swal-button-ok'
-                },
             });
         } catch (error) {
             Swal.fire({
@@ -104,9 +101,6 @@ export default function ManageActivitiesPage() {
                 text: "Impossible d'ajouter l'activité.",
                 icon: "error",
                 confirmButtonText: "OK",
-                customClass: {
-                    confirmButton: 'swal-button-ok'
-                },
             });
         } finally {
             setLoading(false);
@@ -157,9 +151,6 @@ export default function ManageActivitiesPage() {
                 text: "L'activité a été supprimée.",
                 icon: "success",
                 confirmButtonText: "OK",
-                customClass: {
-                    confirmButton: 'swal-button-ok'
-                },
             });
         } catch (error) {
             Swal.fire({
@@ -167,9 +158,6 @@ export default function ManageActivitiesPage() {
                 text: "Impossible de supprimer l'activité.",
                 icon: "error",
                 confirmButtonText: "OK",
-                customClass: {
-                    confirmButton: 'swal-button-ok'
-                },
             });
         } finally {
             setLoading(false);

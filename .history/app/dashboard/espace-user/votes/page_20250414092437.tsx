@@ -49,9 +49,7 @@ const VotePage = () => {
           text: 'Impossible de charger les données de vote.',
           icon: 'error',
           confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'swal-button-ok'
-          },
+          
         });
       } finally {
         setLoading(false);
@@ -111,9 +109,6 @@ const VotePage = () => {
         text: 'Échec du vote, essayez à nouveau.',
         icon: 'error',
         confirmButtonText: 'OK',
-        customClass: {
-          confirmButton: 'swal-button-ok'
-        },
       });
     } finally {
       setLoading(false);
