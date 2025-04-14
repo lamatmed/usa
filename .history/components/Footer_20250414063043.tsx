@@ -37,13 +37,13 @@ const Footer = () => {
         </nav>
 
         {/* Copyright */}
-        <div className="w-full border-t border-gray-400 pt-4 pb-6 px-4 sm:px-6 text-center bg-white">
-          <p className="text-[10px] sm:text-xs text-black whitespace-normal sm:whitespace-nowrap leading-relaxed">
+        <div className="border-t border-gray-400 pt-4 text-center px-2 sm:px-4">
+          <p className="text-[10px] sm:text-xs text-black whitespace-nowrap bg-white">
             © {new Date().getFullYear()}{" "}
-            <span className="font-bold">Union des Sortants d&apos;Algérie</span>. Tous droits réservés.
+            <span className="font-bold">Union des Sortants d&apos;Algérie</span>
+            . Tous droits réservés.
           </p>
         </div>
-
       </div>
     </motion.footer>
   );
