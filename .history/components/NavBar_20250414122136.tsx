@@ -102,7 +102,7 @@ export default function NavBar() {
               className="bg-white text-blue-600 flex items-center space-x-2"
             >
               <Image
-                src={user.photo && user.photo !== "" ? user.photo : "/rim.jpg"}
+                src={user.photo && user.photo !== "" ? user.photo : "/.png"}
                 alt={`Photo de ${user.name}`}
                 width={32}
                 height={32}
@@ -116,7 +116,7 @@ export default function NavBar() {
               <DropdownMenuLabel>
                 <div className="flex items-center space-x-2">
                   <Image
-                    src={user.photo && user.photo !== "" ? user.photo : "/rim.jpg"}
+                    src={user.photo && user.photo !== "" ? user.photo : "/R.png"}
                     alt={`Photo de ${user.name}`}
                     width={32}
                     height={32}
