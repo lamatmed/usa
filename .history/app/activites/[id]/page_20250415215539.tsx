@@ -35,11 +35,11 @@ const ActivityPage = () => {
 
     if (!activity) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-gray-100 text-black">
+            <div className="flex items-center justify-center min-h-screen bg-gray-100">
                 <div className="text-center p-8">
-                    <p className="text-xl mb-4">L&apos;activité n&apos;a pas été trouvée</p>
-                    <Button onClick={() => router.push('/activites')}>
-                        <FaArrowLeft className="mr-2 text-green-500" /> Retour aux activités
+                    <p className="text-xl mb-4">L'activité n'a pas été trouvée</p>
+                    <Button onClick={() => router.push('/activities')}>
+                        <FaArrowLeft className="mr-2" /> Retour aux activités
                     </Button>
                 </div>
             </div>
@@ -81,9 +81,9 @@ const ActivityPage = () => {
             <div className="sticky bottom-4 left-0 right-0 flex justify-center p-4 z-10">
                 <Button
                     onClick={() => router.back()}
-                    className="bg-white/90 shadow-lg border text-black border-gray-200 hover:bg-gray-500 px-6 py-3"
+                    className="bg-white/90 shadow-lg border  border-gray-200 hover:bg-gray-50 px-6 py-3"
                 >
-                    <FaArrowLeft className="mr-2 text-green-500" /> Retour
+                    <FaArrowLeft className="mr-2" /> Retour
                 </Button>
             </div>
         </div>

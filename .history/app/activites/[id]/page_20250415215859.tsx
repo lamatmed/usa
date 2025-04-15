@@ -35,11 +35,11 @@ const ActivityPage = () => {
 
     if (!activity) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-gray-100 text-black">
+            <div className="flex items-center justify-center min-h-screen bg-gray-100 ">
                 <div className="text-center p-8">
                     <p className="text-xl mb-4">L&apos;activité n&apos;a pas été trouvée</p>
                     <Button onClick={() => router.push('/activites')}>
-                        <FaArrowLeft className="mr-2 text-green-500" /> Retour aux activités
+                        <FaArrowLeft className="mr-2" /> Retour aux activités
                     </Button>
                 </div>
             </div>
