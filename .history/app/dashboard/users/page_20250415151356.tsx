@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Role } from "@prisma/client";
-import { blockUser, deleteUser, getAllUsers, unblockUser, updateUser } from "@/utils/actions";
+import { deleteUser, getAllUsers, updateUser } from "@/utils/actions";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/components/AuthContext";
@@ -26,7 +26,7 @@ const UsersPage = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (user?.role !== "ADMIN") {
-      router.push("/");
+      router.push("/dashboard");
     }
   }, [user?.role, router]);
 
@@ -126,11 +126,7 @@ const UsersPage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          if (isBlocked) {
-            await unblockUser(userId);
-          } else {
-            await blockUser(userId);
-          }
+          await updateUser(userId, { isBlocked: !isBlocked });
           setUsers(prevUsers => prevUsers.map(user =>
             user.id === userId ? { ...user, isBlocked: !isBlocked } : user
           ));
@@ -185,16 +181,7 @@ const UsersPage = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col space-y-2">
-                    <Button
-                      variant={user.isBlocked ? "default" : "destructive"}
-                      onClick={() => handleBlockUser(user.id, user.isBlocked)}
-                      color={user.isBlocked ? "green" : "orange"}
-                    >
-                      {user.isBlocked ? "Débloquer" : "Bloquer"}
-                    </Button>
-                    <Button variant="destructive" onClick={() => handleDeleteUser(user.id)} color="red">
-                      Supprimer
-                    </Button>
+                    <Button variant="destructive" onClick={() => handleDeleteUser(user.id)} color="red">Supprimer</Button>
                   </div>
                 </CardContent>
               </Card>

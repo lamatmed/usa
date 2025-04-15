@@ -73,6 +73,7 @@ export const getUserById = async (id: string) => {
 export const getAllUsers = async () => {
   return await prisma.user.findMany({
     select: userSelect,
+    
     orderBy: { createdAt: 'desc' }, // Tri par date de création
   });
 };
@@ -120,9 +121,9 @@ export const unblockUser = async (id: string) => {
 };
 
 // Vérifie si un utilisateur est bloqué
-export const isUserBlocked = async (nni: string) => {
+export const isUserBlocked = async (id: string) => {
   const user = await prisma.user.findUnique({
-    where: { nni },
+    where: { id },
     select: { isBlocked: true },
   });
 
@@ -130,7 +131,6 @@ export const isUserBlocked = async (nni: string) => {
 
   return user.isBlocked;
 };
-
 
 // Supprime un utilisateur
 export const deleteUser = async (id: string) => {

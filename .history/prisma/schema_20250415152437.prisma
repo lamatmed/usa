@@ -20,7 +20,7 @@ model User {
   password  String
   name      String
   role      Role     @default(USER)
-  isBlocked Boolean  @default(false)
+
   address   String?
   job       String?
   domain    String?

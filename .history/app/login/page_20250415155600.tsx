@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { LogIn, Phone, Lock } from "lucide-react"; // Import des icônes
 import Swal from "sweetalert2";
-import { isUserBlocked } from "@/utils/actions";
+import { prisma } from "@/lib/prisma";
 
 const Login = () => {
   const [nni, setNni] = useState("");
@@ -29,68 +29,71 @@ const Login = () => {
   
 
   const handleLogin = async () => {
-  setLoading(true);
-  try {
-    // Vérification si l'utilisateur existe et son statut
-    const blocked = await isUserBlocked(nni); // si `nni` = `id`, sinon adapte l'argument
+    setLoading(true);
+    try {
+      // Vérification si l'utilisateur existe et son statut
+      const userCheck = await prisma.user.findUnique({
+        where: { nni },
+        select: { isBlocked: true }
+      });
 
-    if (blocked) {
-      throw new Error("Votre compte est bloqué. Contactez l'administrateur.");
-    }
+      if (userCheck?.isBlocked) {
+        throw new Error("Votre compte est bloqué. Contactez l'administrateur.");
+      }
 
-    const response = await fetch("/api/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nni, password }),
-    });
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nni, password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(data.message || "Identifiants incorrects");
-    }
+      if (!response.ok) {
+        throw new Error(data.message || "Identifiants incorrects");
+      }
 
-    if (auth) {
-      auth.login(data.token);
-      
-      // Toast de succès
+      if (auth) {
+        auth.login(data.token);
+
+        // Toast de succès
+        toast({
+          title: "Connexion réussie",
+          description: "Bienvenue!",
+          duration: 3000,
+        });
+
+        // Redirection après un court délai
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1500);
+      }
+
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Une erreur inconnue est survenue";
+
+      // Toast d'erreur
       toast({
-        title: "Connexion réussie",
-        description: "Bienvenue!",
-        duration: 3000,
+        title: "Erreur de connexion",
+        description: errorMessage,
+        variant: "destructive",
+        duration: 5000,
       });
 
-      // Redirection après un court délai
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1500);
+      // Alert SweetAlert2 seulement pour les erreurs importantes
+      if (errorMessage.includes("bloqué")) {
+        await Swal.fire({
+          title: "Compte bloqué",
+          text: errorMessage,
+          icon: "warning",
+          confirmButtonText: "Compris",
+          confirmButtonColor: "#3b82f6",
+        });
+      }
+    } finally {
+      setLoading(false);
     }
-    
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Une erreur inconnue est survenue";
-    
-    // Toast d'erreur
-    toast({
-      title: "Erreur de connexion",
-      description: errorMessage,
-      variant: "destructive",
-      duration: 5000,
-    });
-
-    // Alert SweetAlert2 seulement pour les erreurs importantes
-    if (errorMessage.includes("bloqué")) {
-      await Swal.fire({
-        title: "Compte bloqué",
-        text: errorMessage,
-        icon: "warning",
-        confirmButtonText: "Compris",
-        confirmButtonColor: "#3b82f6",
-      });
-    }
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-r  from-green-600 via-emerald-500 to-lime-400">

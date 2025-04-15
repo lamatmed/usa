@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Role } from "@prisma/client";
-import { blockUser, deleteUser, getAllUsers, unblockUser, updateUser } from "@/utils/actions";
+import { deleteUser, getAllUsers, updateUser } from "@/utils/actions";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/components/AuthContext";
@@ -26,7 +26,7 @@ const UsersPage = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (user?.role !== "ADMIN") {
-      router.push("/");
+      router.push("/dashboard");
     }
   }, [user?.role, router]);
 
@@ -90,7 +90,7 @@ const UsersPage = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(16);
-    doc.text("Liste des membres de l'union ", 14, 20);
+    doc.text("Liste des membres de l'union s", 14, 20);
     const today = new Date();
     const dateStr = today.toLocaleDateString("fr-FR", {
       day: "2-digit",
@@ -114,37 +114,6 @@ const UsersPage = () => {
     doc.save("membres_union_sortants.pdf");
   };
 
-  const handleBlockUser = async (userId: string, isBlocked: boolean) => {
-    Swal.fire({
-      title: 'Êtes-vous sûr ?',
-      text: isBlocked ? "Vous allez débloquer cet utilisateur." : "Vous allez bloquer cet utilisateur.",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: isBlocked ? 'Oui, débloquer !' : 'Oui, bloquer !',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          if (isBlocked) {
-            await unblockUser(userId);
-          } else {
-            await blockUser(userId);
-          }
-          setUsers(prevUsers => prevUsers.map(user =>
-            user.id === userId ? { ...user, isBlocked: !isBlocked } : user
-          ));
-          Swal.fire(
-            'Succès !',
-            isBlocked ? 'Utilisateur débloqué avec succès.' : 'Utilisateur bloqué avec succès.',
-            'success'
-          );
-        } catch (error) {
-          Swal.fire('Erreur', "Une erreur s'est produite.", 'error');
-        }
-      }
-    });
-  };
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4 text-center text-white">Gestion des Utilisateurs</h1>
@@ -185,16 +154,7 @@ const UsersPage = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col space-y-2">
-                    <Button
-                      variant={user.isBlocked ? "default" : "destructive"}
-                      onClick={() => handleBlockUser(user.id, user.isBlocked)}
-                      color={user.isBlocked ? "green" : "orange"}
-                    >
-                      {user.isBlocked ? "Débloquer" : "Bloquer"}
-                    </Button>
-                    <Button variant="destructive" onClick={() => handleDeleteUser(user.id)} color="red">
-                      Supprimer
-                    </Button>
+                    <Button variant="destructive" onClick={() => handleDeleteUser(user.id)} color="red">Supprimer</Button>
                   </div>
                 </CardContent>
               </Card>

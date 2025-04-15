@@ -10,7 +10,6 @@ import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { LogIn, Phone, Lock } from "lucide-react"; // Import des icônes
 import Swal from "sweetalert2";
-import { isUserBlocked } from "@/utils/actions";
 
 const Login = () => {
   const [nni, setNni] = useState("");
@@ -32,9 +31,12 @@ const Login = () => {
   setLoading(true);
   try {
     // Vérification si l'utilisateur existe et son statut
-    const blocked = await isUserBlocked(nni); // si `nni` = `id`, sinon adapte l'argument
+    const userCheck = await prisma.user.findUnique({
+      where: { nni },
+      select: { isBlocked: true }
+    });
 
-    if (blocked) {
+    if (userCheck?.isBlocked) {
       throw new Error("Votre compte est bloqué. Contactez l'administrateur.");
     }
 

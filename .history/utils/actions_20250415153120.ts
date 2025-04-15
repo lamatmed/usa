@@ -3,7 +3,8 @@ import { prisma } from "../lib/prisma";
 import bcrypt from "bcryptjs";
 
 // Création d'un utilisateur avec des champs optionnels
-
+import bcrypt from "bcrypt";
+import prisma from "./prisma";
 
 // Types pour une meilleure typage
 type UserRole = "ADMIN" | "USER";
@@ -120,9 +121,9 @@ export const unblockUser = async (id: string) => {
 };
 
 // Vérifie si un utilisateur est bloqué
-export const isUserBlocked = async (nni: string) => {
+export const isUserBlocked = async (id: string) => {
   const user = await prisma.user.findUnique({
-    where: { nni },
+    where: { id },
     select: { isBlocked: true },
   });
 
@@ -130,7 +131,6 @@ export const isUserBlocked = async (nni: string) => {
 
   return user.isBlocked;
 };
-
 
 // Supprime un utilisateur
 export const deleteUser = async (id: string) => {

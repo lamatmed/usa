@@ -26,7 +26,7 @@ const UsersPage = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (user?.role !== "ADMIN") {
-      router.push("/");
+      router.push("/dashboard");
     }
   }, [user?.role, router]);
 

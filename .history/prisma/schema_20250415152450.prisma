@@ -20,7 +20,44 @@ model User {
   password  String
   name      String
   role      Role     @default(USER)
-  isBlocked Boolean  @default(false)
+// Création d'un utilisateur avec des champs optionnels
+export const createUser = async (data: {
+  nni: string;
+  password: string;
+  name: string;
+  role?: "ADMIN" | "USER";
+  address?: string;
+  job?: string;
+  domain?: string;
+  cv?: string;
+  photo?: string;
+}) => {
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+  return await prisma.user.create({
+    data: { ...data, password: hashedPassword },
+  });
+};
+
+// Récupérer un utilisateur par ID avec toutes les infos
+export const getUserById = async (id: string) => {
+  return await prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      nni: true,
+      name: true,
+      role: true,
+      address: true,
+      job: true,
+      domain: true,
+      cv: true,
+      photo: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+};
+
   address   String?
   job       String?
   domain    String?
