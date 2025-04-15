@@ -97,7 +97,7 @@ const ConfigVotePage = () => {
 
         const result = await MySwal.fire({
             title: <span className="text-lg">Confirmer la suppression</span>,
-            html: <p>Voulez-vous vraiment supprimer &quot;<b>{choice.label}</b>&quot; ?</p>,
+            html: <p>Voulez-vous vraiment supprimer <b>{choice.label}</b>" ?</p>,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#ef4444",
