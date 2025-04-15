@@ -146,7 +146,7 @@ const ConfigVotePage = () => {
                         className="mt-4 gap-2"
                         variant="outline"
                     >
-                        <ArrowLeft size={16} /> Retour à l&ldquo;accueil
+                        <ArrowLeft size={16} /> Retour à laccueil
                     </Button>
                 </Card>
             </div>
