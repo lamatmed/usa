@@ -68,8 +68,9 @@ const VotePage = () => {
     return <Loader />;
   }
   if (!user) {
- 
-    return null; 
+    var window: Window & typeof globalThis
+    window.location.href = "/"; // ou window.history.back();
+    return null; // pour éviter le rendu
   }
 
   const handleVote = async (choice: string) => {

@@ -69,7 +69,7 @@ const VotePage = () => {
   }
   if (!user) {
  
-    return null; 
+    return null; // pour éviter le rendu
   }
 
   const handleVote = async (choice: string) => {

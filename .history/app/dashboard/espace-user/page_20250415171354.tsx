@@ -34,7 +34,7 @@ export default function Home() {
   }
 
   if (!user) {
-  
+   / ou window.history.back();
     return null; // pour éviter le rendu
   }
   return (
