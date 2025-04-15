@@ -38,7 +38,7 @@ const ActivityPage = () => {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
                 <div className="text-center p-8 bg-white rounded-lg shadow-md">
-                    <p className="text-xl mb-4 text-gray-800">L&apos;activité n&apos;a pas été trouvée</p>
+                    <p className="text-xl mb-4 text-gray-800">L'activité n'a pas été trouvée</p>
                     <Button
                         onClick={() => router.push('/activities')}
                         className="gap-2"
@@ -158,7 +158,7 @@ const ActivityPage = () => {
                     className="fixed bottom-4 left-0 right-0 flex justify-center"
                 >
                     <Button
-                        onClick={() => router.push('/activites')}
+                        onClick={() => router.push('/activities')}
                         className="shadow-lg px-8 py-4 text-lg"
                     >
                         Voir toutes nos activités
