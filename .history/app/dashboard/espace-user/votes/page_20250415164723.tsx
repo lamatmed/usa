@@ -10,10 +10,6 @@ import { useRouter } from "next/navigation";
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import Swal from 'sweetalert2';  // Import de SweetAlert2
 import Loader from "@/components/Loader";
-import { User } from "@prisma/client";
-type Props = {
-  user?: User | null;
-};
 
 const VotePage = () => {
   const router = useRouter();
@@ -67,11 +63,10 @@ const VotePage = () => {
   if (loading) {
     return <Loader />;
   }
-  if (!user) {
+  if (typeof window !== "undefined" && (user === null || user === undefined)) {
     window.location.href = "/"; // ou window.history.back();
     return null; // pour éviter le rendu
   }
-
   const handleVote = async (choice: string) => {
     // Afficher la fenêtre de confirmation
     const confirmVote = await Swal.fire({
@@ -93,6 +88,7 @@ const VotePage = () => {
       setLoading(true);
 
       try {
+        
         const result = await castVote(user.id, choice);
 
         if (result.success) {

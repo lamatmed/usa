@@ -33,7 +33,7 @@ export default function Home() {
     return <Loader />;
   }
 
-  if (!user) {
+  if (typeof window !== "undefined" && !user) {
     window.location.href = "/"; // ou window.history.back();
     return null; // pour éviter le rendu
   }
@@ -50,7 +50,7 @@ export default function Home() {
             Union des Sortants d&apos;Algérie
           </h1>
           <p className="text-lg text-gray-700 dark:text-gray-300">
-            Bienvenue <span className="font-semibold">{user.name}</span> 👋, gérez efficacement votre espace.
+            Bienvenue <span className="font-semibold">{user?.name}</span> 👋, gérez efficacement votre espace.
           </p>
         </motion.div>
 

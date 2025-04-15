@@ -107,10 +107,11 @@ const UserProfile = () => {
     }
   };
 
-  if (!user) {
+  if (typeof window !== "undefined" || !user) {
     window.location.href = "/"; // ou window.history.back();
     return null; // pour éviter le rendu
   }
+
   return (
     <div className="p-6 max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-2 text-blue-600">

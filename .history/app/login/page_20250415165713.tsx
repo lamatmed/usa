@@ -61,7 +61,7 @@ const Login = () => {
       });
       Swal.fire({
         title: "نجاح",
-        text: "مرحبًا بك في لوحة التحكم الخاصة بك",
+        text: "مرحبًا بك في لوحة التحكم الخاصة بك!",
         icon: "success",
         confirmButtonText: "موافق",
         customClass: {

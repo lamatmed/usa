@@ -32,10 +32,11 @@ const MembershipCard = () => {
     if (loading) {
       return <Loader />;
     }
-  if (!user) {
+  if (typeof window !== "undefined" || !user) {
     window.location.href = "/"; // ou window.history.back();
     return null; // pour éviter le rendu
   }
+
   const membershipNumber = `CS-${user.nni.slice(-4)}-${user.id.slice(0, 4)}`;
 
   return (

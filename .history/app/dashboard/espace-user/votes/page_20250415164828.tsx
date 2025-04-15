@@ -68,8 +68,11 @@ const VotePage = () => {
     return <Loader />;
   }
   if (!user) {
-    window.location.href = "/"; // ou window.history.back();
-    return null; // pour éviter le rendu
+    return (
+      <p className="text-center text-gray-500">
+        Accès réservé aux utilisateurs connectés.
+      </p>
+    );
   }
 
   const handleVote = async (choice: string) => {

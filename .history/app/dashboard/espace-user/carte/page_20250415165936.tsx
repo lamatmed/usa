@@ -33,9 +33,9 @@ const MembershipCard = () => {
       return <Loader />;
     }
   if (!user) {
-    window.location.href = "/"; // ou window.history.back();
-    return null; // pour éviter le rendu
+    return <p className="text-center text-gray-500">Aucun utilisateur connecté.</p>;
   }
+
   const membershipNumber = `CS-${user.nni.slice(-4)}-${user.id.slice(0, 4)}`;
 
   return (
