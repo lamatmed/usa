@@ -71,9 +71,9 @@ const Footer = () => {
               <Link href="#" className="hover:text-green-500 transition-colors duration-300">
                 <Instagram className="w-5 h-5" />
               </Link>
-              <Link href="#" className="hover:text-green-500 transition-colors duration-300">
+              <L href="#" className="hover:text-green-500 transition-colors duration-300">
                 <Linkedin className="w-5 h-5" />
-              </Link>
+              </L>
             </div>
           </div>
         </div>

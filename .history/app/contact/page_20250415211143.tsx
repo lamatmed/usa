@@ -28,7 +28,7 @@ const Contact = () => {
       
       <Card className="w-full max-w-xl bg-white/80 backdrop-blur-md shadow-2xl rounded-3xl border border-white/30">
         <CardContent className="p-6 sm:p-10">
-          <h1 className="text-3xl sm:text-4xl font-bold text-blue-600 mb-4 text-center drop-shadow-sm">
+          <h1 className="text-3xl sm:text-4xl font-bold text- mb-4 text-center drop-shadow-sm">
             Contactez-nous
           </h1>
           <p className="text-gray-600 text-center mb-8 text-base sm:text-lg leading-relaxed">
@@ -60,7 +60,7 @@ const Contact = () => {
               </span>
             </div>
           </div>
-          <div className="mt-8 text-center text-blue-800 text-sm">
+          <div className="mt-8 text-center text-gray-500 text-sm">
             <p>Nous vous répondrons dans les plus brefs délais</p>
           </div>
         </CardContent>

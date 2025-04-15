@@ -28,17 +28,17 @@ const Contact = () => {
       
       <Card className="w-full max-w-xl bg-white/80 backdrop-blur-md shadow-2xl rounded-3xl border border-white/30">
         <CardContent className="p-6 sm:p-10">
-          <h1 className="text-3xl sm:text-4xl font-bold text-blue-600 mb-4 text-center drop-shadow-sm">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4 text-center drop-shadow-sm">
             Contactez-nous
           </h1>
           <p className="text-gray-600 text-center mb-8 text-base sm:text-lg leading-relaxed">
             Pour toute question ou assistance, n&apos;hésitez pas à nous contacter :
           </p>
 
-          <div className="space-y-5 ">
+          <div className="space-y-5 bg-green-400">
             {/* Contact Item */}
             <div className="flex items-center gap-4 bg-white shadow-md hover:shadow-xl transition-shadow duration-300 px-5 py-4 rounded-xl group">
-              <Phone className="w-6 h-6  text-green-600 group-hover:scale-110 transition-transform" />
+              <Phone className="w-6 h-6 text-indigo-600 group-hover:scale-110 transition-transform" />
               <span className="text-gray-800 text-base sm:text-lg font-medium tracking-wide">
                 +222 30572816
               </span>
@@ -46,7 +46,7 @@ const Contact = () => {
 
             {/* Email */}
             <div className="flex items-center gap-4 bg-white shadow-md hover:shadow-xl transition-shadow duration-300 px-5 py-4 rounded-xl group">
-              <Mail className="w-6 h-6  text-green-600 group-hover:scale-110 transition-transform" />
+              <Mail className="w-6 h-6 text-indigo-600 group-hover:scale-110 transition-transform" />
               <span className="text-gray-800 text-base sm:text-lg font-medium tracking-wide">
                 lamat032025@gmail.com
               </span>
@@ -54,13 +54,13 @@ const Contact = () => {
 
             {/* Adresse */}
             <div className="flex items-center gap-4 bg-white shadow-md hover:shadow-xl transition-shadow duration-300 px-5 py-4 rounded-xl group">
-              <MapPin className="w-6 h-6  text-green-600 group-hover:scale-110 transition-transform" />
+              <MapPin className="w-6 h-6 text-indigo-600 group-hover:scale-110 transition-transform" />
               <span className="text-gray-800 text-base sm:text-lg font-medium tracking-wide">
                Nouakchout, Mauritanie
               </span>
             </div>
           </div>
-          <div className="mt-8 text-center text-blue-800 text-sm">
+          <div className="mt-8 text-center text-gray-500 text-sm">
             <p>Nous vous répondrons dans les plus brefs délais</p>
           </div>
         </CardContent>

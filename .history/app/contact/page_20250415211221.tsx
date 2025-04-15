@@ -60,7 +60,7 @@ const Contact = () => {
               </span>
             </div>
           </div>
-          <div className="mt-8 text-center text-blue-800 text-sm">
+          <div className="mt-8 text-center text-green-500 text-sm">
             <p>Nous vous répondrons dans les plus brefs délais</p>
           </div>
         </CardContent>

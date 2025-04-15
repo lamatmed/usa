@@ -38,7 +38,7 @@ export default function Hero() {
 
       {/* Introduction */}
       <motion.p
-        className="mt-6 text-lg sm:text-xl md:text-2xl max-w-2xl text-white/90 drop-shadow-sm leading-relaxed z-10"
+        className="mt-4 text-lg sm:text-xl md:text-2xl max-w-2xl text-white/90"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
@@ -68,12 +68,12 @@ export default function Hero() {
       {/* Bouton */}
       <motion.a
         href="/login"
-        className="mt-8 inline-block px-8 py-3 bg-white text-emerald-600 font-semibold rounded-full shadow-lg hover:text-emerald-700  transition-transform transform hover:scale-105"
+        className="mt-8 inline-block px-8 py-3 bg-white text-emerald-600 font-semibold rounded-full shadow-lg hover:text-blue-900 transition-transform transform hover:scale-105"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        Réjoindre
+        Se connecter
       </motion.a>
     </section>
   );

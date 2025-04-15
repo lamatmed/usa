@@ -62,18 +62,18 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-end">
             <h4 className="text-lg font-semibold mb-4 text-green-600">Suivez-nous</h4>
             <div className="flex space-x-4">
-              <Link href="#" className="hover:text-green-500 transition-colors duration-300">
+              <a href="#" className="hover:text-green-500 transition-colors duration-300">
                 <Facebook className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-green-500 transition-colors duration-300">
+              </a>
+              <a href="#" className="hover:text-green-500 transition-colors duration-300">
                 <Twitter className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-green-500 transition-colors duration-300">
+              </a>
+              <a href="#" className="hover:text-green-500 transition-colors duration-300">
                 <Instagram className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-green-500 transition-colors duration-300">
+              </a>
+              <a href="#" className="hover:text-green-500 transition-colors duration-300">
                 <Linkedin className="w-5 h-5" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-gray-200 py-4">
           <p className="text-xs text-center text-gray-600">
-            © {new Date().getFullYear()} RIM TECHNOLOGIE. Tous droits réservés.
+            © {new Date().getFullYear()} . Tous droits réservés.
           </p>
         </div>
       </div>
