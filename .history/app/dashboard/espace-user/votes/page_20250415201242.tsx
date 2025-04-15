@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 import Loader from "@/components/Loader";
-
+import { User } from "@prisma/client";
 
 const VotePage = () => {
   const router = useRouter();

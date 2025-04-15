@@ -11,7 +11,6 @@ import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 import Loader from "@/components/Loader";
 
-
 const VotePage = () => {
   const router = useRouter();
   const { user } = useContext(AuthContext) ?? {};

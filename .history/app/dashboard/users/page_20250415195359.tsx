@@ -156,7 +156,7 @@ const UsersPage = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <h2 className="text-lg font-semibold mb-2 text-black">Nombre total d&apos;utilisateurs : {filteredUsers.length}</h2>
+      <h2 className="text-lg font-semibold mb-2 text-w">Nombre total d&apos;utilisateurs : {filteredUsers.length}</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {currentUsers.length > 0 ? (
           currentUsers.map((user) => (

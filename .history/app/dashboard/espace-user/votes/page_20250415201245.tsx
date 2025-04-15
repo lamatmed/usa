@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 import Loader from "@/components/Loader";
-
+import { User } from "@prisma/client";
 
 const VotePage = () => {
   const router = useRouter();
@@ -90,7 +90,7 @@ const VotePage = () => {
           const updatedChoices = results.choices.map(item => {
             const newVotes = item.label === choice ? item.votes + 1 : item.votes;
             const newPercentage = parseFloat(((newVotes / newTotalVotes) * 100).toFixed(2));
-
+            
             return {
               ...item,
               votes: newVotes,
@@ -168,10 +168,11 @@ const VotePage = () => {
                 <Button
                   key={choice.label}
                   onClick={() => handleVote(choice.label)}
-                  className={`w-full py-2 rounded transition-colors ${selectedVote === choice.label
+                  className={`w-full py-2 rounded transition-colors ${
+                    selectedVote === choice.label
                       ? "bg-blue-500 text-white"
                       : "bg-gray-500 hover:bg-gray-600"
-                    }`}
+                  }`}
                   disabled={selectedVote !== ""}
                 >
                   {choice.label}
@@ -194,8 +195,8 @@ const VotePage = () => {
           <CardContent>
             <div className="space-y-4 mt-6">
               {results.choices.map((choice) => (
-                <motion.div
-                  key={choice.label}
+                <motion.div 
+                  key={choice.label} 
                   className="bg-blue-50 p-4 rounded-lg shadow-lg"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -215,7 +216,7 @@ const VotePage = () => {
                       {choice.votes} votes ({choice.percentage}%)
                     </div>
                   </div>
-                  <motion.div
+                  <motion.div 
                     className="w-full h-2 bg-blue-300 rounded-full mt-2"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}

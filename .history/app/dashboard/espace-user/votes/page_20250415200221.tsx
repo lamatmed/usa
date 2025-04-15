@@ -8,9 +8,9 @@ import { AuthContext } from "@/components/AuthContext";
 import { castVote, getVoteResults, getChoices } from "@/utils/actions";
 import { useRouter } from "next/navigation";
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';  // Import de SweetAlert2
 import Loader from "@/components/Loader";
-
+import { User } from "@prisma/client";
 
 const VotePage = () => {
   const router = useRouter();
@@ -20,50 +20,57 @@ const VotePage = () => {
     totalVotes: 0,
     choices: [] as { label: string; votes: number; percentage: number }[],
   });
-  const [loading, setLoading] = useState(true);
-
-  const fetchResults = async () => {
-    try {
-      const choices = await getChoices();
-      const result = await getVoteResults();
-
-      const updatedChoices = choices.map((choice: any) => {
-        const choiceVotes = result.choices.find((res: any) => res.label === choice.label)?.votes || 0;
-        const percentage = result.totalVotes > 0 ? (choiceVotes / result.totalVotes) * 100 : 0;
-
-        return {
-          label: choice.label,
-          votes: choiceVotes,
-          percentage: parseFloat(percentage.toFixed(2)),
-        };
-      });
-
-      setResults({
-        totalVotes: result.totalVotes,
-        choices: updatedChoices,
-      });
-    } catch (error) {
-      Swal.fire({
-        title: 'Erreur',
-        text: 'Impossible de charger les données de vote.',
-        icon: 'error',
-        confirmButtonText: 'OK',
-        customClass: {
-          confirmButton: 'swal-button-ok'
-        },
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchResults();
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const choices = await getChoices();
+        const result = await getVoteResults();
+
+        const updatedChoices = choices.map((choice: any) => {
+          const choiceVotes = result.choices.find((res: any) => res.label === choice.label)?.votes || 0;
+          const percentage = result.totalVotes > 0 ? (choiceVotes / result.totalVotes) * 100 : 0;
+
+          return {
+            label: choice.label,
+            votes: choiceVotes,
+            percentage: parseFloat(percentage.toFixed(2)),
+          };
+        });
+
+        setResults({
+          totalVotes: result.totalVotes,
+          choices: updatedChoices,
+        });
+      } catch (error) {
+        Swal.fire({
+          title: 'Erreur',
+          text: 'Impossible de charger les données de vote.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'swal-button-ok'
+          },
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+  if (loading) {
+    return <Loader />;
+  }
+  if (!user) {
+ 
+    return null; 
+  }
 
   const handleVote = async (choice: string) => {
-    if (!user) return;
-
+    // Afficher la fenêtre de confirmation
     const confirmVote = await Swal.fire({
       title: 'Êtes-vous sûr ?',
       text: `Vous allez voter pour ${choice}. Confirmer ?`,
@@ -77,6 +84,7 @@ const VotePage = () => {
       },
     });
 
+    // Si l'utilisateur confirme, procéder au vote
     if (confirmVote.isConfirmed) {
       setSelectedVote(choice);
       setLoading(true);
@@ -85,25 +93,7 @@ const VotePage = () => {
         const result = await castVote(user.id, choice);
 
         if (result.success) {
-          // Calcul optimisé des nouveaux résultats
-          const newTotalVotes = results.totalVotes + 1;
-          const updatedChoices = results.choices.map(item => {
-            const newVotes = item.label === choice ? item.votes + 1 : item.votes;
-            const newPercentage = parseFloat(((newVotes / newTotalVotes) * 100).toFixed(2));
-
-            return {
-              ...item,
-              votes: newVotes,
-              percentage: newPercentage
-            };
-          });
-
-          setResults({
-            totalVotes: newTotalVotes,
-            choices: updatedChoices
-          });
-
-          await Swal.fire({
+          Swal.fire({
             title: 'Succès',
             text: `Vous avez voté pour ${choice}.`,
             icon: 'success',
@@ -112,6 +102,14 @@ const VotePage = () => {
               confirmButton: 'swal-button-ok',
             },
           });
+
+          const updatedChoices = results.choices.map((item) =>
+            item.label === choice
+              ? { ...item, votes: item.votes + 1, percentage: ((item.votes + 1) / (results.totalVotes + 1)) * 100 }
+              : item
+          );
+
+          setResults({ ...results, totalVotes: results.totalVotes + 1, choices: updatedChoices });
         } else {
           Swal.fire({
             title: 'Erreur',
@@ -139,13 +137,6 @@ const VotePage = () => {
     }
   };
 
-  if (loading) {
-    return <Loader />;
-  }
-
-  if (!user) {
-    return null;
-  }
 
   return (
     <div className="max-w-lg mx-auto p-6 text-center">
@@ -168,25 +159,26 @@ const VotePage = () => {
                 <Button
                   key={choice.label}
                   onClick={() => handleVote(choice.label)}
-                  className={`w-full py-2 rounded transition-colors ${selectedVote === choice.label
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-500 hover:bg-gray-600"
+                  className={`w-full py-2 rounded ${selectedVote === choice.label
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-500"
                     }`}
-                  disabled={selectedVote !== ""}
+                  disabled={selectedVote !== ""} // Désactive les autres boutons après le vote
                 >
                   {choice.label}
                 </Button>
               ))
             )}
           </CardContent>
-          <Button
-            className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300 w-full sm:w-auto mt-4"
+           <Button
+                    className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300 w-full sm:w-auto"
             onClick={() => router.push("/dashboard/espace-user")}
-          >
-            Retour
-          </Button>
+                  >
+                    Retour
+                  </Button>
         </Card>
 
+        {/* Affichage des résultats */}
         <Card className="mt-6 shadow-md border border-gray-200 p-4">
           <CardHeader>
             <CardTitle>Résultats des votes</CardTitle>
@@ -194,12 +186,7 @@ const VotePage = () => {
           <CardContent>
             <div className="space-y-4 mt-6">
               {results.choices.map((choice) => (
-                <motion.div
-                  key={choice.label}
-                  className="bg-blue-50 p-4 rounded-lg shadow-lg"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
+                <div key={choice.label} className="bg-blue-50 p-4 rounded-lg shadow-lg transition duration-300 ease-in-out hover:scale-105">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-2">
                       <div className="text-xl font-semibold text-blue-700">
@@ -215,20 +202,13 @@ const VotePage = () => {
                       {choice.votes} votes ({choice.percentage}%)
                     </div>
                   </div>
-                  <motion.div
-                    className="w-full h-2 bg-blue-300 rounded-full mt-2"
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <motion.div
+                  <div className="w-full h-2 bg-blue-300 rounded-full mt-2">
+                    <div
                       className="h-full bg-blue-600 rounded-full"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${choice.percentage}%` }}
-                      transition={{ duration: 1, delay: 0.5 }}
-                    ></motion.div>
-                  </motion.div>
-                </motion.div>
+                      style={{ width: `${choice.percentage}%` }}
+                    ></div>
+                  </div>
+                </div>
               ))}
 
               <div className="text-lg font-medium text-gray-800 mt-4">
