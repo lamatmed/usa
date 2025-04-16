@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import Image from "next/image";
+import { BsRobot } from "react-icons/bs";
 
 const Footer = () => {
   return (
@@ -54,6 +55,12 @@ const Footer = () => {
                 className="text-sm hover:text-green-500 transition-colors duration-300 whitespace-nowrap"
               >
                 À propos
+              </Link>
+              <Link
+                href="/dashboard/messages"
+                className="text-sm hover:text-green-500 transition-colors duration-300 whitespace-nowrap"
+              >
+                <BsRobot size={20} />
               </Link>
             </nav>
           </div>
