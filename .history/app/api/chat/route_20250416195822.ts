@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         return NextResponse.json({
             response: data.choices[0].message.content,
         });
-  
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
         console.error('Erreur Groq API:', err);
         return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
