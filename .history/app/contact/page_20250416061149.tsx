@@ -32,7 +32,7 @@ const Contact = () => {
             Contactez-nous
           </h1>
           <p className="text-gray-600 text-center mb-6 text-sm sm:text-base leading-relaxed">
-            Pour toute question ou assistance, n&apos;hésitez pas à nous contacter :
+            Pour toute question ou assistance, n'hésitez pas à nous contacter :
           </p>
 
           <div className="space-y-3 sm:space-y-4">
