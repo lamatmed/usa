@@ -3,14 +3,13 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ComputerIcon, NotebookPen, Users, User, LogOut, Vote , MessageSquare, IdCard } from "lucide-react";
+import { ComputerIcon, NotebookPen, Users, User, Settings, LogOut, Vote , MessageSquare, IdCard } from "lucide-react";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/components/AuthContext";
 import { FiClipboard } from "react-icons/fi";
 import Loader from "@/components/Loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { BsRobot } from "react-icons/bs";
 
 export default function AdminDashboard() {
   const { user, logout } = useContext(AuthContext) ?? {};
@@ -66,8 +65,8 @@ export default function AdminDashboard() {
     },
     {
       href: "/dashboard/messages",
-      icon: <BsRobot className="h-4 w-4" />,
-      text: "Assistant IA"
+      icon: <MessageSquare className="h-4 w-4" />,
+      text: "Messages"
     }
   ];
 
