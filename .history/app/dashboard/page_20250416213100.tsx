@@ -60,7 +60,7 @@ export default function AdminDashboard() {
       text: "Élections"
     },
     {
-      href: "/dashboard/espace-user/carte",
+      href: "/dashboard/espace-user/votes",
       icon: <IdCard className="h-4 w-4" />,
       text: "Carte "
     },
