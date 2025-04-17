@@ -128,7 +128,7 @@ const Login = () => {
               <div className="flex items-center border rounded-md p-2 bg-gray-100">
                 <Phone className="w-5 h-5 text-green-500 mr-2" />
                 <Input
-                  type="number"
+                type="number"
                   placeholder="Numéro Téléphone"
                   value={nni}
                   onChange={(e) => setNni(e.target.value)}
