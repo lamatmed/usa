@@ -40,7 +40,7 @@ const ActivityPage = () => {
                 <div className="text-center p-8 bg-white rounded-lg shadow-md">
                     <p className="text-xl mb-4 text-gray-800">L&apos;activité n&apos;a pas été trouvée</p>
                     <Button
-                        onClick={() => router.push('/activites')}
+                        onClick={() => router.push('/activities')}
                         className="gap-2"
                     >
                         <FaArrowLeft /> Retour aux activités

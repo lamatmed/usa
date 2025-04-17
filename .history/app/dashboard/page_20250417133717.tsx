@@ -11,7 +11,6 @@ import { FiClipboard } from "react-icons/fi";
 import Loader from "@/components/Loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BsRobot } from "react-icons/bs";
-import Racine from "@/components/Racine";
 
 export default function AdminDashboard() {
   const { user, logout } = useContext(AuthContext) ?? {};
@@ -22,9 +21,12 @@ export default function AdminDashboard() {
     return () => clearTimeout(timeout);
   }, []);
 
-  
+  function handleLogout() {
+    logout();
+    router.push("/");
+  }
   if (loading) return <Loader />;
-  if (!user) return <Racine />;
+  if (!user) return null;
 
   const adminCards = [
     {

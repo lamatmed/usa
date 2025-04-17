@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 import Loader from "@/components/Loader";
-import Racine from "@/components/Racine";
 
 
 const VotePage = () => {

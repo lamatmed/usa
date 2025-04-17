@@ -13,7 +13,6 @@ import Uploader from "@/components/Uploader";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Loader from "@/components/Loader";
-import Racine from "@/components/Racine";
 
 const MySwal = withReactContent(Swal);
 

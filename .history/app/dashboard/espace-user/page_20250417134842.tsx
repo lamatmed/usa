@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/components/AuthContext";
 import Loader from "@/components/Loader";
-import Racine from "@/components/Racine";
 
 export default function UserDashboard() {
   const { user } = useContext(AuthContext) ?? {};

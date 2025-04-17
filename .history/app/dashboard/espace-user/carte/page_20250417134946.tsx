@@ -11,7 +11,6 @@ import { useReactToPrint } from "react-to-print";
 import Loader from "@/components/Loader";
 import { motion } from "framer-motion";
 import { Download, ArrowLeft } from "lucide-react";
-import Racine from "@/components/Racine";
 
 const MembershipCard = () => {
   const { user } = useContext(AuthContext) ?? {};
