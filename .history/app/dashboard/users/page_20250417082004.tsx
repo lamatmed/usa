@@ -65,7 +65,7 @@ const UsersPage = () => {
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Oui, Enlever !',
+      confirmButtonText: 'Oui, E !',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -193,7 +193,7 @@ const UsersPage = () => {
                       {user.isBlocked ? "Débloquer" : "Bloquer"}
                     </Button>
                     <Button variant="destructive" onClick={() => handleDeleteUser(user.id)} color="red">
-                      Enlever
+                      Supprimer
                     </Button>
                   </div>
                 </CardContent>

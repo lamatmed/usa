@@ -193,7 +193,7 @@ const UsersPage = () => {
                       {user.isBlocked ? "Débloquer" : "Bloquer"}
                     </Button>
                     <Button variant="destructive" onClick={() => handleDeleteUser(user.id)} color="red">
-                      Enlever
+                      enlever
                     </Button>
                   </div>
                 </CardContent>
