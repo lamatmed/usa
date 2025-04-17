@@ -54,8 +54,7 @@ const Footer = () => {
                 href="/about"
                 className="text-sm hover:text-green-500 transition-colors duration-300 whitespace-nowrap"
               >
-                À propos
-              </Link>
+                À propos           </Link>
               <Link
                 href="/dashboard/messages"
                 className="text-sm hover:text-green-500 transition-colors duration-300 whitespace-nowrap"
